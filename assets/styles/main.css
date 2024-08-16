@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
+
+@tailwind base;
+@import './base.css';
+
+@tailwind components;
+@import './components.css';
+
+@tailwind utilities;
+  
+/* width */
+::-webkit-scrollbar { 
+    width: 5px;
+    height: 5px;
+} 
+  
+/* Track */
+::-webkit-scrollbar-track { 
+    background: var(--primary); 
+} 
+  
+/* Handle */
+::-webkit-scrollbar-thumb { 
+    background: var(--accents-4);
+    border-radius: 5px; 
+} 
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { 
+    background: var(--accents-4);
+}

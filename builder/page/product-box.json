@@ -1,0 +1,84 @@
+{
+  "query": [
+    {
+      "@type": "@builder.io/core:Query",
+      "operator": "is",
+      "property": "urlPath",
+      "value": "/test"
+    }
+  ],
+  "data": {
+    "title": "test",
+    "themeId": false,
+    "blocks": [
+      {
+        "@type": "@builder.io/sdk:Element",
+        "@version": 2,
+        "id": "builder-368bdea6d3d64cd5b5ddc20869f8c9cd",
+        "component": {
+          "name": "Product Box",
+          "options": {
+            "product": {
+              "@type": "@builder.io/core:Request",
+              "request": {
+                "url": "https://cdn.builder.io/api/v1/proxy-api?url=https%3A%2F%2Fapi.bigcommerce.com%2Fstores%2Fpfzwomjdc2%2Fv3%2Fcatalog%2Fproducts%2F94",
+                "headers": {
+                  "X-Auth-Token": "lnhh0sdmtittoahxd2c4wpnytp0s1ix",
+                  "Accept": "application/json; charset=utf-8",
+                  "Content-Type": "application/json"
+                },
+                "method": "GET"
+              },
+              "options": {
+                "product": "94"
+              }
+            }
+          }
+        },
+        "responsiveStyles": {
+          "large": {
+            "display": "flex",
+            "flexDirection": "column",
+            "position": "relative",
+            "flexShrink": "0",
+            "boxSizing": "border-box",
+            "marginTop": "20px"
+          }
+        }
+      }
+    ],
+    "url": "/test",
+    "state": {
+      "deviceSize": "large",
+      "location": {
+        "path": "",
+        "query": {}
+      }
+    }
+  },
+  "lastUpdated": 1665691167816,
+  "meta": {
+    "kind": "page",
+    "lastPreviewUrl": "http://localhost:3000?builder.space=07fb0ef7cf9d43b6a8939811b2695cc0&builder.cachebust=true&builder.preview=page&builder.noCache=true&__builder_editing__=true&builder.overrides.page=67c305f6b9cb4f1a9243b9b4c092cfb0&builder.overrides.67c305f6b9cb4f1a9243b9b4c092cfb0=67c305f6b9cb4f1a9243b9b4c092cfb0&builder.overrides.page:/=67c305f6b9cb4f1a9243b9b4c092cfb0",
+    "hasLinks": false,
+    "componentsUsed": {
+      "Product Box": 1
+    },
+    "needsHydration": false
+  },
+  "createdDate": 1665003842908,
+  "modelId": "885fbb7aa3cc42e9a536eca9cdb375e7",
+  "createdBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "id": "3c2d4eef36b547789aa43e0057e1440f",
+  "variations": {},
+  "testRatio": 1,
+  "published": "published",
+  "name": "product box",
+  "previewUrl": "http://localhost:3000",
+  "firstPublished": 1665008159387,
+  "lastUpdatedBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "rev": "jgubut0cxzr",
+  "@originOrg": "07fb0ef7cf9d43b6a8939811b2695cc0",
+  "@originContentId": "67c305f6b9cb4f1a9243b9b4c092cfb0",
+  "@originModelId": "f4e99c3684ff48ba830c6b75fe8cae94"
+}

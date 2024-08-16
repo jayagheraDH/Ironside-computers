@@ -1,0 +1,115 @@
+.admin-panel {
+  min-height: 100vh;
+  padding: 40px 0;
+  .admin-header {
+    svg {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+.admin {
+  width: 1024px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  .btn-small {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .mb-5 {
+    .btn:first-child {
+      margin-right: 25px;
+    }
+  }
+  h2 {
+    margin: 50px 0;
+  }
+  .select {
+    width: 48%;
+  }
+  .accordion-inner {
+    padding: 20px 40px;
+  }
+  .accordion-content-inner {
+    margin-bottom: 20px;
+  }
+  &-section {
+    > div {
+      margin-bottom: 20px;
+    }
+  }
+  .accordion {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+  }
+  .heading {
+    padding: 20px;
+    z-index: 9;
+    position: relative;
+    &.open + div,
+    + .true {
+      display: block;
+      height: auto;
+      visibility: visible;
+    }
+    + div {
+      height: 0;
+      visibility: hidden;
+      border-top: var(--border);
+      &.true {
+        padding: 40px;
+      }
+    }
+  }
+  .popup-bg {
+    border: 1px solid #363636;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+  }
+  .popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary);
+    padding: 50px;
+    border: 1px solid var(--border);
+    width: 500px;
+  }
+}
+
+.delete {
+  padding: 0 10px;
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: $color-white;
+  }
+}
+
+.Toastify__toast-container--bottom-right {
+  bottom: 80px !important;
+}
+
+.expand-buttons .flex {
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: -110px;
+  margin-bottom: 20px;
+  .btn {
+    margin-right: 0;
+    + .btn {
+      margin-top: 20px;
+    }
+  }
+}

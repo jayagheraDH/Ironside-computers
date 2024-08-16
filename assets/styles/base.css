@@ -1,0 +1,206 @@
+:root {
+  --primary: #ffffff;
+  --primary-2: rgba(255, 255, 255, 0.10);
+  --secondary: #000000;
+  --secondary-2: #111;
+  --red-bg: rgba(255, 155, 155, 0.5);
+  --theme-bg: #FFFFFF;
+  --selection: var(--cyan);
+
+  --text-base: #000000;
+  --text-primary: #000000;
+  --text-secondary: white;
+  --navigations: rgba(0, 0, 0, 0.80);
+  --hover: rgba(0, 0, 0, 0.075);
+  --hover-1: rgba(0, 0, 0, 0.05);
+  --hover-2: rgba(255, 255, 255, 0.20);
+  --border-1: rgba(0, 0, 0, 0.20);
+  --account-box: rgba(234, 234, 234, 0.20);
+
+  --cyan: #22b8cf;
+  --green: #37b679;
+  --red: #da3c3c;
+  --pink: #e64980;
+  --purple: #f81ce5;
+
+  --blue: #0070f3;
+
+  --violet-light: #7048e8;
+  --violet: #5f3dc4;
+  --button-color: #000000;
+  --accents-0: #767676;
+  --accents-1: #BCBCBC;
+  --accents-2: #7A7A7A;
+  --accents-3: #B4B4B4;
+  --accents-4: #737373;
+  --accents-5: #000000;
+  --accents-6: #F9F9F9;
+  --accents-7: #D6D6D6;
+  --accents-8: #393939;
+  --accents-9: #E6E6E6;
+  --accents-10: #323232;
+  --accents-11: rgba(0, 0, 0, 0.08);
+  --accents-12: rgba(0, 0, 0, 0.05);
+  --accents-13: rgba(0, 0, 0, 0.50);
+  --accents-14: rgba(0, 0, 0, 0.05);
+  --accents-15: rgba(0, 0, 0, 0.08);
+  --accents-16: #ffffff;
+  --accents-17: #363636;
+  --accents-18: #D6D6D6;
+  --accents-19: rgba(255, 255, 255, 0);
+  --accents-20: #CCC;
+  --accents-21: #686868;
+  --accents-22: (255, 255, 255, 0.5);
+  --error: #FFB1B1;
+  --error-bg: rgba(255, 0, 0, 0.20);
+  --bg-color: #F0F0F0;
+  --heading-fonts: 'Arimo', sans-serif;
+  --body-fonts: 'Inconsolata', monospace;
+  --head-fonts: 'Ramabhadra', sans-serif;
+  --secondary-fonts: "Fake Receipt";
+  --border: #00000030;
+  --menu-bg-light: rgba(255, 255, 255, 5%);
+}
+
+[data-theme='dark'] {
+  --primary: #000000;
+  --primary-2: rgba(255, 255, 255, 0.50);
+  --secondary: #ffffff;
+  --secondary-2: #f1f3f5;
+  --red-bg: rgba(185, 56, 56, 0.5);
+  --theme-bg: #101010;
+
+  --selection: var(--purple);
+
+  --text-base: white;
+  --text-primary: white;
+  --text-secondary: black;
+  --navigations: rgba(255, 255, 255, 0.80);
+  --hover: rgba(255, 255, 255, 0.075);
+  --hover-1: rgba(255, 255, 255, 0.10);
+  --hover-2: rgba(16, 16, 16, 0.20);
+  --border-1: rgba(255, 255, 255, 0.20);
+  --account-box: rgba(0, 0, 0, 0.20);
+  --button-color: #101010;
+  --accents-0: #A8A8A8;
+  --accents-1: #4A4A4A;
+  --accents-2: #7A7A7A;
+  --accents-3: #B4B4B4;
+  --accents-4: #737373;
+  --accents-5: #969696;
+  --accents-6: #141414;
+  --accents-7: #303030;
+  --accents-8: #898989;
+  --accents-9: #444444;
+  --accents-10: #B0B0B0;
+  --accents-11: #232323;
+  --accents-12: rgba(255, 255, 255, 0.05);
+  --accents-13: rgba(255, 255, 255, 0.50);
+  --accents-14: rgba(255, 255, 255, 0.10);
+  --accents-15: #232323;
+  --accents-16: #161616;
+  --accents-17: #AAA;
+  --accents-18: #3D3D3D;
+  --accents-19: rgba(16, 16, 16, 0);
+  --accents-20: #4C4C4C;
+  --accents-21: #AFAFAF;
+  --accents-22: (0, 0, 0, 0.5);
+  --error: #5C2D2D;
+  --error-bg: rgba(167, 21, 21, 0.30);
+  --accents-15: #232323;
+  --bg-color: #222222;
+  --border: #ffffff26;
+  --heading-fonts: 'Arimo', sans-serif;
+  --body-fonts: 'Inconsolata', monospace;
+  --secondary-fonts: "Fake Receipt";
+  --head-fonts: 'Ramabhadra', 'Arimo', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* html {
+  height: 100%;
+  box-sizing: border-box;
+  touch-action: manipulation;
+  font-feature-settings: 'case' 1, 'rlig' 1, 'calt' 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary);
+  color: var(--text-primary);
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  display: block;
+} */
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.terms-conditions-header {
+  border: 15px dotted rgb(255, 255, 255);
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes run {
+  from {
+    width: 8px;
+  }
+
+  to {
+    width: 36px;
+  }
+}
+
+@keyframes run {
+  from {
+    width: 8px;
+  }
+
+  to {
+    width: 36px;
+  }
+}

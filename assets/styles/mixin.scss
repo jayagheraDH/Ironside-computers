@@ -1,0 +1,197 @@
+// sass-lint:disable border-zero, quotes
+/* ========== media mixin ========== */
+// @use 'sass:math';
+
+@use 'sass:math';
+
+//px to vw converting function
+@function get-vw($target) {
+  $vw-context: (1920 * 0.01) * 1px;
+  @return ($target/$vw-context) * 1vw;
+}
+
+@mixin xl {
+  @media screen and (min-width: 1921px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (max-width: 1640px) {
+    @content;
+  }
+}
+
+@mixin desktop-small {
+  @media screen and (max-width: 1439px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: 1279px) {
+    @content;
+  }
+}
+
+@mixin tablet-small {
+  @media screen and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin mobile-small {
+  @media screen and (max-width: 666px) {
+    @content;
+  }
+}
+
+/* ========== common mixin ========== */
+
+@mixin col {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@mixin row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin transition($trans) {
+  -webkit-transition: $trans;
+  -moz-transition: $trans;
+  transition: $trans;
+}
+
+@mixin transform($transforms) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin translate($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+@mixin flex-basis($flex-basis) {
+  -webkit-flex-basis: ($flex-basis);
+  flex-basis: ($flex-basis);
+}
+
+@mixin display-flex($flex) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: $flex;
+}
+
+@mixin align-item($align-item) {
+  -webkit-box-align: $align-item;
+  -moz-box-align: $align-item;
+  -ms-flex-align: $align-item;
+  -webkit-align-items: $align-item;
+  align-items: $align-item;
+}
+
+@mixin align-self($align-self) {
+  -webkit-align-self: $align-self;
+  align-self: $align-self;
+}
+
+@mixin justify-content($justify-content) {
+  -webkit-justify-content: $justify-content;
+  justify-content: $justify-content;
+}
+
+@mixin flex-wrap($flex-wrap) {
+  flex-wrap: $flex-wrap;
+  -webkit-flex-wrap: $flex-wrap;
+}
+
+@mixin flex-direction($flex-direction) {
+  flex-direction: $flex-direction;
+  -webkit-flex-direction: $flex-direction;
+}
+
+@mixin text-shadow($text-shadow) {
+  text-shadow: 0px 0px 3.944px var(--secondary),
+    0px 0px 6.888px var(--secondary), 0px 0px 23.609px var(--secondary),
+    0px 0px 50.218px var(--secondary), 0px 0px 46.66px var(--secondary),
+    0px 0px 0.655px var(--secondary);
+}
+
+@mixin align-center($center) {
+  text-align: $center;
+}
+
+@mixin box-shadow($box-shadow) {
+  &:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 71px;
+    background-image: url('https://cdn.builder.io/api/v1/image/assets%2Ff6d91abf288f4e5fb3b6f1e8b846274b%2F85df00f9dc6f489b9ae79b0bb620f3ab');
+    background-size: 100% 100%;
+    min-width: 315px;
+    width: 17.969vw;
+    height: 79.115vw;
+    z-index: 1;
+    @include xl {
+      width: 345px;
+      height: 1519px;
+    }
+
+    @include tablet {
+      height: 850px;
+      width: 255px;
+      min-width: auto;
+    }
+    @include tablet-small {
+      width: 250px;
+      height: 1100px;
+      background-image: url('https://cdn.builder.io/api/v1/image/assets%2Ff6d91abf288f4e5fb3b6f1e8b846274b%2F58992ec281c74fd9a81985896eb075ff');
+    }
+    @include tablet {
+      width: 220px;
+    }
+    @include mobile-small {
+      height: 680px;
+      width: 160px;
+    }
+  }
+}
+@mixin flex($flex) {
+  @include display-flex(flex);
+  @include align-item(center);
+  @include justify-content(center);
+}
+@mixin flex-col($flex-col) {
+  @include display-flex(flex);
+  @include flex-direction(column);
+  @include align-item(center);
+  @include justify-content(center);
+}

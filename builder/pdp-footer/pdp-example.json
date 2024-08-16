@@ -1,0 +1,81 @@
+{
+  "query": [],
+  "id": "e80c2001ca5c4753a14bfd6b4d5bb0c3",
+  "createdDate": 1665080709145,
+  "createdBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "firstPublished": 1665080722911,
+  "lastUpdatedBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "meta": {
+    "hasLinks": false,
+    "kind": "component",
+    "componentsUsed": {
+      "Products Grid": 1
+    },
+    "lastPreviewUrl": "https://nextjs-bigcommerce-starter-one.vercel.app//product/fog-linen-chambray-towel-beige-stripe/?builder.space=07fb0ef7cf9d43b6a8939811b2695cc0&builder.cachebust=true&builder.preview=pdp-footer&builder.noCache=true&__builder_editing__=true&builder.overrides.pdp-footer=8c1eaf7959034455b26b3745e342e4e6&builder.overrides.8c1eaf7959034455b26b3745e342e4e6=8c1eaf7959034455b26b3745e342e4e6",
+    "needsHydration": false
+  },
+  "modelId": "d86b3058bcad47eb8d964c6642ffbac2",
+  "data": {
+    "preview": {
+      "@type": "@builder.io/core:Request",
+      "request": {
+        "headers": {
+          "Content-Type": "application/json",
+          "Accept": "application/json; charset=utf-8",
+          "X-Auth-Token": "lnhh0sdmtittoahxd2c4wpnytp0s1ix"
+        },
+        "url": "https://cdn.builder.io/api/v1/proxy-api?url=https%3A%2F%2Fapi.bigcommerce.com%2Fstores%2Fpfzwomjdc2%2Fv3%2Fcatalog%2Fproducts%2F77",
+        "method": "GET"
+      },
+      "options": {
+        "product": "77"
+      }
+    },
+    "blocks": [
+      {
+        "@type": "@builder.io/sdk:Element",
+        "@version": 2,
+        "id": "builder-3b9e0f1446d14f549a332bb24a7c93f8",
+        "component": {
+          "name": "Products Grid",
+          "options": {
+            "productsList": [
+              "81",
+              "88",
+              "107",
+              "111"
+            ],
+            "title": "You might also like"
+          }
+        },
+        "responsiveStyles": {
+          "large": {
+            "display": "flex",
+            "flexDirection": "column",
+            "position": "relative",
+            "flexShrink": "0",
+            "boxSizing": "border-box",
+            "marginTop": "20px"
+          }
+        }
+      }
+    ],
+    "state": {
+      "deviceSize": "large",
+      "location": {
+        "path": "",
+        "query": {}
+      }
+    }
+  },
+  "variations": {},
+  "previewUrl": "https://nextjs-bigcommerce-starter-one.vercel.app//product/fog-linen-chambray-towel-beige-stripe/",
+  "name": "pdp example",
+  "lastUpdated": 1665693203688,
+  "published": "published",
+  "testRatio": 1,
+  "rev": "etsctw0iva5",
+  "@originOrg": "07fb0ef7cf9d43b6a8939811b2695cc0",
+  "@originContentId": "8c1eaf7959034455b26b3745e342e4e6",
+  "@originModelId": "738971e864944c88b5cb0c1bf298fdf7"
+}

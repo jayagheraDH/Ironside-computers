@@ -1,0 +1,74 @@
+{
+  "modelId": "885fbb7aa3cc42e9a536eca9cdb375e7",
+  "createdBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "lastUpdatedBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "meta": {
+    "lastPreviewUrl": "http://localhost:3000/product-grid?builder.space=07fb0ef7cf9d43b6a8939811b2695cc0&builder.cachebust=true&builder.preview=page&builder.noCache=true&__builder_editing__=true&builder.overrides.page=3ae935b4b06b49b0b4d4ca5ea20936ba&builder.overrides.3ae935b4b06b49b0b4d4ca5ea20936ba=3ae935b4b06b49b0b4d4ca5ea20936ba&builder.overrides.page:/product-grid=3ae935b4b06b49b0b4d4ca5ea20936ba",
+    "kind": "page",
+    "componentsUsed": {
+      "Products Grid": 1
+    },
+    "hasLinks": false,
+    "needsHydration": false
+  },
+  "variations": {},
+  "query": [
+    {
+      "property": "urlPath",
+      "value": "/product-grid",
+      "@type": "@builder.io/core:Query",
+      "operator": "is"
+    }
+  ],
+  "firstPublished": 1665010915281,
+  "lastUpdated": 1665081696612,
+  "testRatio": 1,
+  "name": "product grid",
+  "published": "published",
+  "createdDate": 1665008733839,
+  "id": "ff5b753088dd4cdca3f058fe8628528f",
+  "data": {
+    "title": "product grid",
+    "themeId": false,
+    "blocks": [
+      {
+        "@type": "@builder.io/sdk:Element",
+        "@version": 2,
+        "id": "builder-f2003296a7ab48bcb6dd45e939a9aae0",
+        "component": {
+          "name": "Products Grid",
+          "options": {
+            "productsList": [
+              "86",
+              "103",
+              "77",
+              "111"
+            ]
+          }
+        },
+        "responsiveStyles": {
+          "large": {
+            "display": "flex",
+            "flexDirection": "column",
+            "position": "relative",
+            "flexShrink": "0",
+            "boxSizing": "border-box",
+            "marginTop": "20px"
+          }
+        }
+      }
+    ],
+    "url": "/product-grid",
+    "state": {
+      "deviceSize": "large",
+      "location": {
+        "path": "",
+        "query": {}
+      }
+    }
+  },
+  "rev": "jgubut0cxzr",
+  "@originOrg": "07fb0ef7cf9d43b6a8939811b2695cc0",
+  "@originContentId": "3ae935b4b06b49b0b4d4ca5ea20936ba",
+  "@originModelId": "f4e99c3684ff48ba830c6b75fe8cae94"
+}

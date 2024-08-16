@@ -1,0 +1,260 @@
+.forge-pc {
+  padding: 71px 0 0;
+  max-width: 1600px;
+  margin: auto;
+
+  @include desktop {
+    max-width: none;
+    margin: 0 40px;
+  }
+
+  @include desktop-small {
+    padding-top: 130px;
+  }
+
+  @include tablet {
+    padding-top: 40px;
+    min-height: calc(100vh - 91px);
+  }
+
+  @include tablet-small {
+    margin: 0 20px;
+    padding-top: 0;
+    @include flex-direction(column);
+  }
+
+  &-desktop {
+    display: block;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &-mobile {
+    display: none;
+
+    @include mobile {
+      display: block;
+    }
+
+    >div {
+      @include justify-content(flex-end);
+      margin-bottom: 14px;
+    }
+  }
+
+  h1 {
+    font-size: 64px;
+    line-height: 64px;
+    margin-bottom: 18px;
+    @extend .align-center;
+
+    @include desktop-small {
+      font-size: 50px;
+      line-height: 50px;
+    }
+
+    @include tablet {
+      font-size: 40px;
+      line-height: 40px;
+    }
+
+    @include mobile {
+      font-size: 20px;
+      line-height: 20px;
+      text-align: left;
+    }
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 12px;
+    @extend .align-center;
+
+    @include mobile {
+      text-align: left;
+    }
+  }
+
+  .css-1qggkls p:first-of-type,
+  .forge-pc-desc {
+    line-height: 19px;
+    letter-spacing: 0.96px;
+    color: #9c9c9c;
+    max-width: 554px;
+    margin-left: auto;
+    margin-right: auto;
+    @extend .mb94;
+    @extend .align-center;
+
+    @include mobile {
+      font-size: 13px;
+      line-height: 13px;
+      letter-spacing: 0;
+      max-width: none;
+      text-align: left;
+    }
+  }
+
+  &-image {
+    width: 38.854vw;
+    height: 38.948vw;
+
+    // height: 49.948vw;
+    @include xl {
+      width: 746px;
+      height: 959px;
+    }
+
+    @include tablet-small {
+      width: 100%;
+      height: 455px;
+    }
+
+    @include mobile {
+      height: 355px;
+    }
+
+    img {
+      width: 38.854vw;
+      // height: 49.948vw;
+      height: 38.948vw;
+
+      @include xl {
+        width: 746px;
+        height: 959px;
+      }
+
+      @include tablet-small {
+        width: 100%;
+        height: 455px;
+      }
+
+      @include mobile {
+        height: 355px;
+      }
+    }
+  }
+
+  &-content {
+    width: calc(100% - 38.854vw);
+
+    @include xl {
+      width: calc(100% - 746px);
+    }
+
+    @include tablet-small {
+      width: 100%;
+    }
+  }
+}
+
+.forge-listing {
+  @include mobile {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 11px;
+  }
+
+  .slick-slide>div {
+    height: 100%;
+    padding: 0 8px;
+  }
+
+  .slick-arrow.slick-prev {
+    transform: rotate(180deg);
+  }
+
+  .box-listing {
+    min-height: 318px;
+    height: 100%;
+
+    @include mobile {
+      min-height: 254px;
+      width: 50%;
+      padding: 0 6px;
+    }
+
+    >div {
+      padding: 15px 20px;
+      border: 1px solid #363636;
+      background-color: var(--account-box);
+      backdrop-filter: blur(15px);
+      height: 100%;
+
+      @include mobile {
+        padding: 10px;
+        min-height: 254px;
+      }
+    }
+
+    &-logo {
+      max-width: 105px;
+      margin-bottom: 12px;
+
+      @include mobile {
+        max-width: 85px;
+      }
+    }
+
+    p {
+      @extend .align-left;
+    }
+
+    &-series-name {
+      font-weight: 700;
+    }
+
+    .processor {
+      height: 100%;
+    }
+  }
+
+  .learn-more {
+    // @extend .fs-13;
+    @include display-flex(flex);
+    @include justify-content(flex-end);
+    // margin-top: auto;
+    // margin-left: auto;
+    text-transform: uppercase;
+
+    a {
+      font-size: 13px;
+      line-height: 13px;
+      letter-spacing: -1.625px;
+      font-family: var(--secondary-fonts);
+      @include display-flex(flex);
+      @include align-item(center);
+
+      @include mobile {
+        font-size: 11px;
+        line-height: 11px;
+      }
+
+      svg {
+        width: 11px;
+        height: 8px;
+        margin-left: 6px;
+        fill: red;
+      }
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.customize-toggle {
+  width: 48px;
+  height: 27px;
+
+  &.true {
+    background-color: rgba(255, 154, 154, 0.50);
+  }
+}
+
+.customize-toggle.intel {
+  width: 27px;
+  height: 10px;
+}

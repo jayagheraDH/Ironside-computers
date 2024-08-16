@@ -1,0 +1,184 @@
+[data-theme='light'] {
+  .mega-menu-content-box:hover .mega-menu-heading {
+    text-shadow: none;
+  }
+}
+
+[data-theme='light'] {
+  .learn-more a:after {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='13' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M.799 6.637a.68.68 0 0 1 .68-.68H15.07a.68.68 0 0 1 0 1.36H1.479a.68.68 0 0 1-.68-.68Z' fill='%23000'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.152.842a.68.68 0 0 1 .962-.012l5.474 5.338a.68.68 0 0 1 0 .973l-5.474 5.338a.68.68 0 1 1-.95-.973l4.975-4.852-4.975-4.85a.68.68 0 0 1-.012-.962Z' fill='%23000'/%3E%3C/svg%3E");
+  }
+}
+
+.homepage {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@keyframes run {
+  from {
+    width: 8px;
+  }
+
+  to {
+    width: 36px;
+  }
+}
+
+.hero-carousel {
+  .slick-dots {
+    bottom: 34px;
+    left: 44px;
+    line-height: 0;
+    text-align: left;
+
+    @include mobile {
+      left: 18px;
+    }
+
+    li {
+      width: 8px;
+      height: 8px;
+      margin: 0 5px;
+      // transition: all 0.4s ease;
+      // transition: all 0.85s cubic-bezier(0.68, 0, 0.265, 0);
+
+      button {
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        transition: all 0.85s cubic-bezier(0.68, 0, 0.265, 0);
+
+        &::before {
+          font-size: 0;
+          line-height: 0;
+          width: 8px;
+          height: 8px;
+          border-radius: 56px;
+          background-color: var(--secondary);
+          opacity: 0.5;
+        }
+      }
+
+      &.slick-active {
+        width: 36px;
+        // transition: all 0.6s cubic-bezier(0.68, 0, 0.265, 0);
+
+        button {
+          width: 36px;
+          transition: all .6s ease-in-out;
+          // transition: all 0.6s cubic-bezier(0.68, 0, 0.265, 0);
+
+          &::before {
+            width: 36px;
+            transition: all .6s ease-in-out;
+            opacity: 1;
+            background-color: $color-white;
+          }
+        }
+      }
+    }
+  }
+
+  .css-1pe5g7r {
+    padding-top: 47.3%;
+  }
+
+  .carousel-video {
+    @extend .d-flex;
+    @extend .justify-center;
+  }
+}
+
+.builder-carousel {
+  .builder-blocks {
+    @include display-flex(flex);
+  }
+}
+
+.learn-more {
+  margin: 28px 0 0;
+  position: relative;
+  display: inline-flex;
+
+  @include mobile {
+    margin: 15px 0 0;
+  }
+
+  a {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: var(--body-fonts);
+
+    @include mobile {
+      font-size: 13px;
+    }
+
+    &:hover {
+      &:after {
+        transform: translateX(10px);
+        transition: all 0.4s ease;
+      }
+    }
+
+    &:after {
+      content: '';
+      width: 15px;
+      height: 12px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='13' viewBox='0 0 16 13' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0.798828 6.6367C0.798828 6.26113 1.10329 5.95667 1.47887 5.95667H15.0706C15.4461 5.95667 15.7506 6.26113 15.7506 6.6367C15.7506 7.01228 15.4461 7.31674 15.0706 7.31674H1.47887C1.10329 7.31674 0.798828 7.01228 0.798828 6.6367Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.15216 0.841609C9.41438 0.572723 9.84492 0.567315 10.1138 0.82953L15.5877 6.16758C15.7189 6.29556 15.7929 6.47112 15.7929 6.65444C15.7929 6.83776 15.7189 7.01331 15.5877 7.1413L10.1138 12.4793C9.84492 12.7416 9.41438 12.7362 9.15216 12.4673C8.88995 12.1984 8.89535 11.7678 9.16424 11.5056L14.1388 6.65444L9.16424 1.80325C8.89535 1.54104 8.88995 1.11049 9.15216 0.841609Z' fill='white'/%3E%3C/svg%3E");
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: inline-block;
+      margin-left: 10px;
+      vertical-align: middle;
+      transition: all 0.4s ease;
+
+      @include tablet-small {
+        width: 11px;
+        height: 8px;
+        margin-left: 7px;
+      }
+
+      @include mobile-small {
+        width: 10px;
+      }
+    }
+  }
+}
+
+.product-card {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: relative;
+
+  .bg-img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-height: 344px;
+
+    @include desktop {
+      min-height: 280px;
+    }
+
+    @include tablet {
+      min-height: 22.205vw;
+    }
+
+    @include tablet-small {
+      min-height: 220px;
+    }
+
+    @include mobile-small {
+      min-height: 165px;
+    }
+  }
+}

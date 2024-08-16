@@ -1,0 +1,81 @@
+{
+  "lastUpdated": 1665694333591,
+  "lastUpdatedBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "id": "1fe06ff70fee4de5ba5b7316e0b4008a",
+  "variations": {},
+  "previewUrl": "https://nextjs-bigcommerce-starter-one.vercel.app/product/able-brewing-system",
+  "data": {
+    "preview": {
+      "options": {
+        "product": "86"
+      },
+      "request": {
+        "method": "GET",
+        "headers": {
+          "Accept": "application/json; charset=utf-8",
+          "X-Auth-Token": "lnhh0sdmtittoahxd2c4wpnytp0s1ix",
+          "Content-Type": "application/json"
+        },
+        "url": "https://cdn.builder.io/api/v1/proxy-api?url=https%3A%2F%2Fapi.bigcommerce.com%2Fstores%2Fpfzwomjdc2%2Fv3%2Fcatalog%2Fproducts%2F86"
+      },
+      "@type": "@builder.io/core:Request"
+    },
+    "blocks": [
+      {
+        "@type": "@builder.io/sdk:Element",
+        "@version": 2,
+        "id": "builder-1ee0e3e8a6274c2383c6f0cef8228cd9",
+        "component": {
+          "name": "Products Grid",
+          "options": {
+            "productsList": [
+              "77",
+              "98",
+              "94",
+              "104"
+            ],
+            "title": "You might also like"
+          }
+        },
+        "responsiveStyles": {
+          "large": {
+            "display": "flex",
+            "flexDirection": "column",
+            "position": "relative",
+            "flexShrink": "0",
+            "boxSizing": "border-box",
+            "marginTop": "20px"
+          }
+        }
+      }
+    ],
+    "state": {
+      "deviceSize": "large",
+      "location": {
+        "path": "",
+        "query": {}
+      }
+    }
+  },
+  "query": [],
+  "testRatio": 1,
+  "createdBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "name": "ex 2",
+  "meta": {
+    "componentsUsed": {
+      "Products Grid": 1
+    },
+    "kind": "component",
+    "lastPreviewUrl": "https://nextjs-bigcommerce-starter-one.vercel.app/product/able-brewing-system?builder.space=07fb0ef7cf9d43b6a8939811b2695cc0&builder.cachebust=true&builder.preview=pdp-footer&builder.noCache=true&__builder_editing__=true&builder.overrides.pdp-footer=82c8d1a14b57432997c988296362d282&builder.overrides.82c8d1a14b57432997c988296362d282=82c8d1a14b57432997c988296362d282",
+    "hasLinks": false,
+    "needsHydration": false
+  },
+  "createdDate": 1665685145108,
+  "modelId": "d86b3058bcad47eb8d964c6642ffbac2",
+  "firstPublished": 1665685176883,
+  "published": "published",
+  "rev": "etsctw0iva5",
+  "@originOrg": "07fb0ef7cf9d43b6a8939811b2695cc0",
+  "@originContentId": "82c8d1a14b57432997c988296362d282",
+  "@originModelId": "738971e864944c88b5cb0c1bf298fdf7"
+}

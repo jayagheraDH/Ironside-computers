@@ -1,0 +1,16 @@
+{
+  "title": "Ironside Computers",
+  "titleTemplate": "%s - Prebuilt Custom Gaming Computer & PC Builders – Ironside",
+  "description": "Prebuilt Custom Gaming Computer & PC Builders – Ironside",
+  "openGraph": {
+    "type": "website",
+    "locale": "en_IE",
+    "url": "https://ironsidecomputers.com/",
+    "site_name": "Ironside Computers"
+  },
+  "twitter": {
+    "handle": "Ironside Computers",
+    "site": "Ironside Computerstjs",
+    "cardType": "summary_large_image"
+  }
+}

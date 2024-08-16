@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "kind": "page",
+    "hasLinks": false,
+    "componentsUsed": {
+      "Products Grid": 1,
+      "Product Box": 1
+    },
+    "lastPreviewUrl": "https://nextjs-bigcommerce-starter-one.vercel.app/?builder.space=07fb0ef7cf9d43b6a8939811b2695cc0&builder.cachebust=true&builder.preview=page&builder.noCache=true&__builder_editing__=true&builder.overrides.page=ccf0217cf3db4b24b7c567e51331c218&builder.overrides.ccf0217cf3db4b24b7c567e51331c218=ccf0217cf3db4b24b7c567e51331c218&builder.overrides.page:/=ccf0217cf3db4b24b7c567e51331c218",
+    "needsHydration": false
+  },
+  "variations": {},
+  "modelId": "885fbb7aa3cc42e9a536eca9cdb375e7",
+  "lastUpdatedBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "id": "cba2a1262ec14b71af21a370b9480eea",
+  "name": "/",
+  "published": "published",
+  "query": [
+    {
+      "value": "/",
+      "property": "urlPath",
+      "@type": "@builder.io/core:Query",
+      "operator": "is"
+    }
+  ],
+  "data": {
+    "title": "/",
+    "themeId": false,
+    "blocks": [
+      {
+        "@type": "@builder.io/sdk:Element",
+        "@version": 2,
+        "id": "builder-a9ae058d176f49f28744cec1f8b14082",
+        "component": {
+          "name": "Product Box",
+          "options": {
+            "product": {
+              "@type": "@builder.io/core:Request",
+              "request": {
+                "url": "https://cdn.builder.io/api/v1/proxy-api?url=https%3A%2F%2Fapi.bigcommerce.com%2Fstores%2Fpfzwomjdc2%2Fv3%2Fcatalog%2Fproducts%2F88",
+                "headers": {
+                  "X-Auth-Token": "lnhh0sdmtittoahxd2c4wpnytp0s1ix",
+                  "Accept": "application/json; charset=utf-8",
+                  "Content-Type": "application/json"
+                },
+                "method": "GET"
+              },
+              "options": {
+                "product": "88"
+              }
+            }
+          }
+        },
+        "responsiveStyles": {
+          "large": {
+            "display": "flex",
+            "flexDirection": "column",
+            "position": "relative",
+            "flexShrink": "0",
+            "boxSizing": "border-box",
+            "marginTop": "20px"
+          }
+        }
+      },
+      {
+        "@type": "@builder.io/sdk:Element",
+        "@version": 2,
+        "id": "builder-d473e9f8d55344b98ec8c2d268a2af10",
+        "component": {
+          "name": "Products Grid",
+          "options": {
+            "productsList": [
+              "88",
+              "98",
+              "80",
+              "111",
+              "97",
+              "86"
+            ]
+          }
+        },
+        "responsiveStyles": {
+          "large": {
+            "display": "flex",
+            "flexDirection": "column",
+            "position": "relative",
+            "flexShrink": "0",
+            "boxSizing": "border-box",
+            "marginTop": "20px"
+          }
+        }
+      }
+    ],
+    "url": "/",
+    "state": {
+      "deviceSize": "large",
+      "location": {
+        "path": "",
+        "query": {}
+      }
+    }
+  },
+  "createdBy": "IqzTkBgwWTbzaXDAhTL6IpwiCah1",
+  "lastUpdated": 1665032905730,
+  "testRatio": 1,
+  "createdDate": 1658156374163,
+  "firstPublished": 1665003399630,
+  "rev": "jgubut0cxzr",
+  "@originOrg": "07fb0ef7cf9d43b6a8939811b2695cc0",
+  "@originContentId": "ccf0217cf3db4b24b7c567e51331c218",
+  "@originModelId": "f4e99c3684ff48ba830c6b75fe8cae94"
+}

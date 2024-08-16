@@ -1,0 +1,49 @@
+{
+  "customTargetingAttributes": {
+    "category": {
+      "type": "BigCommerceCategory"
+    },
+    "productsList": {
+      "type": "BigCommerceProductsList"
+    },
+    "product": {
+      "type": "BigCommerceProduct"
+    }
+  },
+  "settings": {
+    "plugins": {
+      "@builder.io/plugin-bigcommerce": {
+        "accessToken": "lnhh0sdmtittoahxd2c4wpnytp0s1ix",
+        "hasConnected": true,
+        "storeHash": "pfzwomjdc2"
+      }
+    },
+    "customComponents": [
+      "TextBox",
+      "Product Box",
+      "Products Grid"
+    ]
+  },
+  "type": "space",
+  "siteUrl": "https://nextjs-bigcommerce-starter-one.vercel.app",
+  "name": "BigCommerce - Demo",
+  "loadPlugins": [
+    "@builder.io/plugin-bigcommerce@0.0.3-0"
+  ],
+  "id": "07fb0ef7cf9d43b6a8939811b2695cc0",
+  "@version": 6,
+  "cloneInfo": {
+    "contentIdMap": {
+      "82c8d1a14b57432997c988296362d282": "1fe06ff70fee4de5ba5b7316e0b4008a",
+      "8c1eaf7959034455b26b3745e342e4e6": "e80c2001ca5c4753a14bfd6b4d5bb0c3",
+      "8e90a1a8e02b40d595dc11d3ede6bcb3": "aff0603f810e454fa3f04b17ffd40a2a",
+      "3ae935b4b06b49b0b4d4ca5ea20936ba": "ff5b753088dd4cdca3f058fe8628528f",
+      "67c305f6b9cb4f1a9243b9b4c092cfb0": "3c2d4eef36b547789aa43e0057e1440f",
+      "ccf0217cf3db4b24b7c567e51331c218": "cba2a1262ec14b71af21a370b9480eea"
+    },
+    "modelIdMap": {
+      "738971e864944c88b5cb0c1bf298fdf7": "d86b3058bcad47eb8d964c6642ffbac2",
+      "f4e99c3684ff48ba830c6b75fe8cae94": "885fbb7aa3cc42e9a536eca9cdb375e7"
+    }
+  }
+}
