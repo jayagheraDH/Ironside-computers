@@ -28,12 +28,12 @@ const OptionSelectionController = ({ product, categoriesDataFiltered }: any) => 
                         if (category.toLocaleLowerCase() == 'case') {
                             caseImageChange(productData?.product_id, colorOpts)
                         }
-                        const colorArr = [...selectedColor]
-                        colorArr?.forEach((ele: any) => {
-                            if (category === ele?.category_name && !colorOpts) {
-                                setSelectedColor([])
-                            }
-                        })
+                        // const colorArr = [...selectedColor]
+                        // colorArr?.forEach((ele: any) => {
+                        //     if (category === ele?.category_name && !colorOpts) {
+                        //         setSelectedColor([])
+                        //     }
+                        // })
                         setSelectedIds((prev: any) => {
                             const catExist = prev?.findIndex(
                                 (obj: any) => obj?.cat === productData?.category_name
@@ -135,6 +135,11 @@ const OptionSelectionController = ({ product, categoriesDataFiltered }: any) => 
                                 }
                                 return prev
                             })
+                        }
+                    } else {
+                        if (selectedColor?.length) {
+                            const filteredData = selectedColor?.filter((item: any) => item?.category_name !== category);
+                            setSelectedColor(filteredData);
                         }
                     }
                 })

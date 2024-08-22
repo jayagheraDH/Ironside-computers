@@ -43,10 +43,7 @@ const ProductSelectionModal = ({
     toast.error('Insufficient stock')
   }
 
-  const handleColorSelection = (
-    data: { entityId: any; prices: { price: { value: any } } },
-    color: { node: any }
-  ) => {
+  const handleColorSelection = (data: any, color: { node: any }) => {
     colorOpts?.forEach((option: any) => {
       if (option.entityId == color?.node.value.split(',')[2]) {
         if (!option?.variants.edges[0].node.inventory.isInStock) {
@@ -57,7 +54,22 @@ const ProductSelectionModal = ({
         colorSelection?.forEach((clr: any) => {
           if (clr?.entityId === data?.entityId) clr['color'] = option
         })
-        setDefaultColors(colorSelection)
+        const hasMemoryCategory = colorSelection?.some(
+          (item: any) =>
+            item.categoryName === data?.categories?.edges[0]?.node?.name
+        )
+        if (!hasMemoryCategory) {
+          const temp = {
+            entityId: data?.entityId,
+            categoryName: data?.categories?.edges[0]?.node?.name,
+            price: data?.prices.price.value,
+            color: option,
+          }
+          colorSelection.push(temp)
+          setDefaultColors([...colorSelection])
+        } else {
+          setDefaultColors([...colorSelection])
+        }
         setIncompatibleProducts({})
         setIncompatibleProdIds([])
         setIncompatibleCats([])
@@ -120,11 +132,20 @@ const ProductSelectionModal = ({
 
   const loadImage = (prod: any) => {
     let image = ''
-    selectedColor.forEach((color: any) => {
-      if (color?.parent_id === prod?.entityId) {
-        image = color?.product_image
+    defaultColors?.forEach((opt: any) => {
+      if (prod?.entityId === opt?.entityId) {
+        prod?.customFields?.edges.map((field: any) => {
+          if (field?.node?.value.split(',')[2] == opt?.color?.entityId) {
+            image = opt?.color.images.edges[0].node.urlOriginal
+          }
+        })
       }
     })
+    // selectedColor.forEach((color: any) => {
+    //   if (color?.parent_id === prod?.entityId) {
+    //     image = color?.product_image
+    //   }
+    // })
     if (image === '') image = prod?.images?.edges[0]?.node?.urlOriginal
     return image
   }
@@ -311,9 +332,9 @@ const ProductSelectionModal = ({
 
                 <div className="flex align-v-center justify-space">
                   <>
-                    {/* {data?.customFields?.edges.length < 3 && !isMerch ? (
+                    {data?.customFields?.edges.length < 2 && !isMerch ? (
                       <div className="color-pattel flex w-100">
-                        {data?.customFields?.edges?.map(
+                        {/* {data?.customFields?.edges?.map(
                           (color: any, index: number) => (
                             <div key={index}>
                               <button
@@ -348,7 +369,7 @@ const ProductSelectionModal = ({
                               })}
                             </div>
                           )
-                        )}
+                        )} */}
                         {!selectedIds?.some(
                           (product: any) =>
                             product?.product === data?.entityId &&
@@ -357,7 +378,7 @@ const ProductSelectionModal = ({
                           <p className="case-price mb-0">{renderPrice(data)}</p>
                         )}
                       </div>
-                    ) : ( */}
+                    ) : (
                       <>
                         {toggle && parseInt(toggleIndex) === index && (
                           <div className="colorPattelListSelect">
@@ -406,7 +427,7 @@ const ProductSelectionModal = ({
                           </p>
                         )}
                       </>
-                    {/* )} */}
+                    )}
                   </>
                   {data?.customFields?.edges?.length >= 2 ? (
                     <>

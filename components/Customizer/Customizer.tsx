@@ -189,7 +189,7 @@ const Cutomizer: FC<Props> = (props) => {
         onOptionSelections(ele.entityId, ele.categoryName, ele.price, ele.color)
       })
     }
-  }, [categoriesDataFiltered, selectedIds])
+  }, [categoriesDataFiltered])
 
   const onModalSelection = (category: any) => {
     setModalData(category)
@@ -253,7 +253,7 @@ const Cutomizer: FC<Props> = (props) => {
     } catch (errors: any) {
       if (errors?.errors) {
         if (errors.errors[0]?.code === 'insufficient_stock')
-          toast.error('Selected product varaints are not in stock')
+          toast.error('Selected Product is currently out of stock.')
         else toast.error('Some error occured, please try again later')
         setLoading(false)
         return
