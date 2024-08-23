@@ -186,6 +186,24 @@ const OptionSelectionController = ({ product, categoriesDataFiltered }: any) => 
         return warranty
     }
 
+    const shippingDays = (selectedDays: any) => {
+        let shipsBy = ''
+        categoriesDataFiltered?.forEach((cat: any) => {
+            if (cat?.categoryName === "Services") {
+                cat?.subCategory?.forEach((subs: any) => {
+                    if (subs?.categoryName === "Assembly Time") {
+                        subs?.products?.forEach((prod: any) => {
+                            if (prod?.name === selectedDays) {
+                                shipsBy = prod?.images.edges[0].node.altText;
+                            }
+                        })
+                    }
+                })
+            }
+        })
+        return shipsBy
+    }
+
     return {
         selectedIds,
         selectedColor,
@@ -193,7 +211,8 @@ const OptionSelectionController = ({ product, categoriesDataFiltered }: any) => 
         optionSelections,
         modalImage,
         onOptionSelections,
-        warranties
+        warranties,
+        shippingDays
     }
 }
 

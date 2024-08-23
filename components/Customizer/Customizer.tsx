@@ -55,6 +55,7 @@ const Cutomizer: FC<Props> = (props) => {
     modalImage,
     onOptionSelections,
     warranties,
+    shippingDays,
   } = OptionSelectionController({ product, categoriesDataFiltered })
   const [basePrice, setBasePrice] = useState<number>(0)
   const [modalData, setModalData] = useState<any>({})
@@ -218,7 +219,7 @@ const Cutomizer: FC<Props> = (props) => {
         }
       })
     })
-    const list_price = totalPrice
+    // const list_price = totalPrice
     const productIds: any = []
     selectedIds?.forEach((prod: any) => {
       optionSelections?.forEach((obj: any) => {
@@ -244,7 +245,7 @@ const Cutomizer: FC<Props> = (props) => {
       }
       await addItem({
         productId,
-        list_price,
+        // list_price,
         variantId,
         optionSelections,
       })
@@ -337,7 +338,11 @@ const Cutomizer: FC<Props> = (props) => {
     optionSelections?.filter((opt: any) => {
       if (opt?.category_name === 'Assembly Time') prod = opt?.product_name
     })
-    const shippingDays = prod?.includes('10') ? 10 : 5
+    const selectedShipping = optionSelections?.filter((cat: any) => {
+      if (cat?.category_name === 'Assembly Time') return cat
+    })
+    const days = shippingDays(selectedShipping[0]?.product_name)
+    const shippingDay: any = days.split('-')[1] ? days.split('-')[1] : 5
     function addBusinessDays(startDate: string | number | Date, days: number) {
       let count = 0
       let currentDate = new Date(startDate)
@@ -351,7 +356,7 @@ const Cutomizer: FC<Props> = (props) => {
       }
       return currentDate
     }
-    let futureDate = addBusinessDays(today, shippingDays)
+    let futureDate = addBusinessDays(today, shippingDay)
     let formattedDate =
       (futureDate.getMonth() + 1).toString().padStart(2, '0') +
       '/' +
@@ -406,7 +411,7 @@ const Cutomizer: FC<Props> = (props) => {
           order: {
             items: [],
             subTotal: {
-              value: 11000,
+              value: totalPrice,
               currency: 'USD',
             },
             totalTax: {
@@ -422,7 +427,7 @@ const Cutomizer: FC<Props> = (props) => {
               currency: 'USD',
             },
             totalPrice: {
-              value: 11000,
+              value: totalPrice,
               currency: 'USD',
             },
           },
@@ -431,15 +436,14 @@ const Cutomizer: FC<Props> = (props) => {
       window.BreadPayments.setup({
         integrationKey: 'a7496808-6bf0-4504-9ab9-42821c807572',
       })
-
+      // console.log('BreadPayments Registered: ', placement)
       window.BreadPayments.registerPlacements(placement)
-
       window.BreadPayments.on('INSTALLMENT:APPLICATION_CHECKOUT', () => {})
       window.BreadPayments.on('INSTALLMENT:APPLICATION_DECISIONED', () => {})
     } else {
       console.error('BreadPayments is not available on window object')
     }
-  }, [])
+  }, [totalPrice])
 
   return (
     <>
@@ -722,12 +726,11 @@ const Cutomizer: FC<Props> = (props) => {
                   </div>
                   <div>
                     <label>Total</label>
-                    <div id="bread-checkout-btn" />{' '}
                     {/* DemoID to render breadPay placement */}
                     <span className="customizer-total-price">
                       {convertCurrency(totalPrice)}
                     </span>
-                    <span>or $75.50/month</span>
+                    <div id="bread-checkout-btn" />
                   </div>
                   {Object.keys(incompatibleProducts).length ? (
                     <Button
