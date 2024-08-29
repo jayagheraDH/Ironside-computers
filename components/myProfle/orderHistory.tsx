@@ -8,15 +8,20 @@ import usePrice from '@commerce/use-price'
 
 const OrderHistory = ({ data, currency }: any) => {
   const customerOrders = useCustomerOrders()
-  const [orderHistory, setOrderHistory] = useState([])
+  const [orderHistory, setOrderHistory] = useState<any>([])
   const [orderItems, setOrderItems] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [orderViewData, setOrderViewData] = useState<any>({})
   const getUsers = async () => {
-    const ordersData: any = await customerOrders({
-      entityId: data?.entityId,
-    })
-    setOrderHistory(ordersData)
+    try {
+      const ordersData: any = await customerOrders({
+        entityId: data?.entityId,
+      })
+      setOrderHistory(ordersData)
+    } catch (error) {
+      setOrderHistory(null)
+      console.error(error)
+    }
   }
   useEffect(() => {
     getUsers()
@@ -287,9 +292,7 @@ const OrderHistory = ({ data, currency }: any) => {
                           </div>
                           <div>
                             <p>Total</p>
-                            <h2>
-                              {convertCurrency(order.total_inc_tax)}
-                            </h2>
+                            <h2>{convertCurrency(order.total_inc_tax)}</h2>
                           </div>
                           <button
                             onClick={() => {

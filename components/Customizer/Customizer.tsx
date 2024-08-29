@@ -333,11 +333,7 @@ const Cutomizer: FC<Props> = (props) => {
   }
 
   const getShippingDate = () => {
-    let prod = ''
     let today = new Date()
-    optionSelections?.filter((opt: any) => {
-      if (opt?.category_name === 'Assembly Time') prod = opt?.product_name
-    })
     const selectedShipping = optionSelections?.filter((cat: any) => {
       if (cat?.category_name === 'Assembly Time') return cat
     })
@@ -395,7 +391,7 @@ const Cutomizer: FC<Props> = (props) => {
           }
         }
       }
-    }, 7000)
+    }, 6000)
   }, [])
   useEffect(() => {
     {
@@ -464,7 +460,7 @@ const Cutomizer: FC<Props> = (props) => {
           ],
         }}
       />
-      {!!categoriesDataFiltered.length ? (
+      {!!categoriesDataFiltered?.length ? (
         <div className="customizer">
           <div
             className="customizer-product flex flex-wrap align-v-center"

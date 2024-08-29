@@ -10,7 +10,7 @@ const defaultOpts = {
 
 export type SearchProductsInput = {
   search?: string
-  categoryId?: number
+  categoryId?: any
   brandId?: number
   sort?: string
   productIn?: string
@@ -25,8 +25,7 @@ export const fetcher: HookFetcher<SearchProductsData, SearchProductsInput> = (
   const url = new URL(options?.url ?? defaultOpts.url, 'http://a')
 
   if (search) url.searchParams.set('search', search)
-  if (Number.isInteger(categoryId))
-    url.searchParams.set('category', String(categoryId))
+  if (categoryId) url.searchParams.set('category', categoryId)
   if (Number.isInteger(brandId)) url.searchParams.set('brand', String(brandId))
   if (sort) url.searchParams.set('sort', sort)
   if (productIn) url.searchParams.set('productIn', productIn)

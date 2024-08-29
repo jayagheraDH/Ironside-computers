@@ -75,12 +75,12 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     paths: locales
       ? locales.reduce<string[]>((arr, locale) => {
           // Add a product path for every locale
-          products.forEach((product) => {
+          products?.forEach((product) => {
             arr.push(`/${locale}/customizer${product.node.path}`)
           })
           return arr
         }, [])
-      : products.map((product) => `/customizer${product.node.path}`),
+      : products?.map((product) => `/customizer${product.node.path}`),
     fallback: 'blocking',
   }
 }
@@ -95,14 +95,27 @@ export default function Slug({
   const [colorOpts, setColorOpts] = useState<any[]>([])
   const [currency, setCurrency] = useState<any>({})
   optionsCategories.forEach((category) => {
-    category.productCategories.forEach((subCategory: any, index: number) => {
-      const products = useSearch({
-        categoryId: subCategory.entityId,
-      })
-      category.productCategories[index].products = products.data?.found
-        ? products.data?.products
-        : []
+    const uniqueValueIds = new Set(
+      category.productCategories.map((item: any) => item.entityId)
+    )
+    const commaSeparatedString = Array.from(uniqueValueIds).join(',')
+    const products = useSearch({
+      categoryId: commaSeparatedString,
     })
+    if (products?.data?.found) {
+      category.productCategories.forEach((subs: any) => {
+        let catProds: any = []
+        products?.data?.products?.map((prods: any) => {
+          const mouseNode = prods?.node?.categories?.edges.find(
+            (item: any) => item.node.name === subs?.name
+          )
+          if (mouseNode) {
+            catProds.push(prods)
+          }
+        })
+        if (catProds?.length) subs.products = catProds
+      })
+    }
   })
 
   const productData = useSearch({
@@ -163,7 +176,7 @@ export default function Slug({
       setTimeout(() => {
         optionsCategories?.forEach((data) => {
           data?.productCategories?.forEach((category: any) => {
-            if (category.products.length) {
+            if (category?.products?.length) {
               category.products.forEach((productCat: any) => {
                 optionsProduct?.forEach((ele: any) => {
                   data?.category,
@@ -239,7 +252,7 @@ export default function Slug({
           })
           groupProductsByCategory(filteredSubCategories)
         }
-      }, 2000)
+      }, 500)
     }
   }, [optionsCategories, productData.data, colorOptions])
 

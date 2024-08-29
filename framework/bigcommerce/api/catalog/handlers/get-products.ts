@@ -23,7 +23,7 @@ const getProducts: ProductsHandlers['getProducts'] = async ({
   if (search) url.searchParams.set('keyword', search)
   if (productIn) url.searchParams.set('id:in', productIn)
 
-  if (category && Number.isInteger(Number(category)))
+  if (category)
     url.searchParams.set('categories:in', category)
 
   if (brand && Number.isInteger(Number(brand)))
