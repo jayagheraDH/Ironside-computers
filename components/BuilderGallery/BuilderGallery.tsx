@@ -60,8 +60,6 @@ const BuilderGallery = (props: any) => {
         {data?.images?.map((link: any, index: any) => (
           <div key={index} className="slide">
             <a
-              href="javascript.void(0)"
-              target="_blank"
               onClick={() => handleImageClick(link.image)}
             >
               <img
