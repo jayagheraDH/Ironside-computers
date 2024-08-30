@@ -42,9 +42,10 @@ const getProducts: ProductsHandlers['getProducts'] = async ({
   // We only want the id of each product
   url.searchParams.set('include_fields', 'id')
 
-  const { data } = await config.storeApiFetch<{ data: { id: number }[] }>(
+  const { data, meta } = await config.storeApiFetch<{ data: { id: number }[], meta: any }>(
     url.pathname + url.search
   )
+  const totalPages = meta?.pagination?.total_pages
   const entityIds = data.map((p) => p.id)
   const found = entityIds.length > 0
   // We want the GraphQL version of each product
@@ -60,15 +61,37 @@ const getProducts: ProductsHandlers['getProducts'] = async ({
     return prods
   }, {})
   const products: ProductEdge[] = found ? [] : graphqlData.products
+  if (totalPages > 1) {
+    let prodData = [...graphqlData?.products]
+    let paginatedEntityIds: any[] = []
+    let current_page = 2;
+    while (current_page <= totalPages) {
+      url.searchParams.set('page', String(current_page))
+      const { data } = await config.storeApiFetch<{ data: { id: number }[], meta: any }>(
+        url.pathname + url.search
+      )
+      const entityIds = data.map((p) => p.id)
+      const paginatedProducts = await getAllProducts({
+        variables: { first: LIMIT, entityIds },
+        config,
+      })
+      paginatedEntityIds = [...paginatedEntityIds, ...entityIds]
+      prodData = [...prodData, ...paginatedProducts?.products]
+      current_page++
+    }
+    if (current_page > totalPages) {
+      res.status(200).json({ data: { products: prodData, found } })
+    }
+  } else {
+    // Populate the products array with the graphql products, in the order
+    // assigned by the list of entity ids
+    entityIds.forEach((id) => {
+      const product = productsById[id]
+      if (product) products.push(product)
+    })
+    res.status(200).json({ data: { products, found } })
+  }
 
-  // Populate the products array with the graphql products, in the order
-  // assigned by the list of entity ids
-  entityIds.forEach((id) => {
-    const product = productsById[id]
-    if (product) products.push(product)
-  })
-
-  res.status(200).json({ data: { products, found } })
 }
 
 export default getProducts
