@@ -439,7 +439,7 @@ const Cutomizer: FC<Props> = (props) => {
     } else {
       console.error('BreadPayments is not available on window object')
     }
-  }, [totalPrice])
+  }, [])
 
   return (
     <>
