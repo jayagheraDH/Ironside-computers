@@ -1135,6 +1135,9 @@ body .category-header {
     @include tablet-small {
       margin-left: 0 !important;
     }
+    &:hover {
+      opacity: 0.5;
+    }
   }
 }
 

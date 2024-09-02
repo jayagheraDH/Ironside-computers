@@ -182,7 +182,7 @@ export default function Cart({ header }: any) {
               <div className="sub-total">
                 <ul className="sub-total-top ml-0">
                   <li className="flex justify-between">
-                    <span className="cart-subtotal-label">Total items</span>
+                    <span className="cart-subtotal-label">Total Items</span>
                     <span className="cart-subtotal-value">
                       {totalQuantities}
                     </span>
