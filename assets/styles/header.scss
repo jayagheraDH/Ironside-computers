@@ -15,7 +15,7 @@ body {
         }
 
         @include mobile {
-          padding: 70px 30px 0;
+          padding: 62px 30px 0;
         }
       }
     }
@@ -1073,7 +1073,7 @@ body .category-header {
 
     li.buy-now {
       margin-left: 15px;
-      padding: 8px 15px;
+      padding: 9px 15px;
       border: 1px solid var(--border);
       border-radius: 79px;
       font-family: var(--secondary-fonts);
@@ -1091,16 +1091,13 @@ body .category-header {
       }
       &:hover {
         cursor: pointer;
+        border-color: var(--secondary);
+        background: var(--hover);
       }
       a {
         font-size: 13px;
         line-height: 13px;
         letter-spacing: -1.625px;
-
-        &:hover {
-          border-color: var(--secondary);
-        }
-
         @include mobile-small {
           font-size: 12px;
           line-height: 12px;

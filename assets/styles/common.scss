@@ -182,8 +182,9 @@ body {
     letter-spacing: 0.96px;
     // font-family: var(--body-fonts);
     @include mobile {
-      font-size: 14px;
-      line-height: 14px;
+      font-size: 13px;
+      line-height: 13px;
+      letter-spacing: 0.7px;
     }
 
     &.fs-32 {
@@ -727,6 +728,7 @@ textarea {
   padding: 32px;
   @extend .flex-direction;
   @extend .align-start;
+  z-index: 8;
 
   @include mobile{
     width: 90%;

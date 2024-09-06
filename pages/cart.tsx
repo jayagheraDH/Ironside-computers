@@ -204,7 +204,7 @@ export default function Cart({ header }: any) {
                     </span>
                   </li>
                   <li className="flex justify-between">
-                    <span className="cart-subtotal-label">Taxes</span>
+                    <span className="cart-subtotal-label">Tax</span>
                     <span className="cart-subtotal-value">$0.00</span>
                   </li>
                 </ul>
@@ -220,7 +220,7 @@ export default function Cart({ header }: any) {
                   )}`}</p>
                 </div>
               )}
-              <div className="checkout-btn mt-16 w-full block">
+              <div className="checkout-btn mt-16 mb-10 w-full block">
                 {isEmpty ? (
                   <a className="btn" href="/">
                     Continue Shopping

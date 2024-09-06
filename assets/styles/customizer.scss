@@ -397,11 +397,14 @@ button.add-to-cart {
 
   h2 {
     color: #757575;
-    padding-top: 20px;
+    padding-top: 30px;
     margin-bottom: 20px;
 
     @include mobile {
       padding-top: 0;
+    }
+    &:first-child {
+      padding-top: 20px;
     }
   }
 

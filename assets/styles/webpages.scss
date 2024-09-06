@@ -48,6 +48,9 @@
       }
       a {
         text-decoration: underline;
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }
@@ -247,5 +250,6 @@
   }
   .account-pages {
     height: auto;
+    overflow: hidden;
   }
 }

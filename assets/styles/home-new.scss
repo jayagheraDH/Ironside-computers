@@ -6,6 +6,7 @@
     @include mobile {
       min-width: 142px;
       padding: 20.5px 20px;
+      border-color: var(--primary-2);
     }
   }
   h2 {
@@ -78,7 +79,7 @@
     right: 0;
     bottom: 0;
     letter-spacing: 0.96px;
-    max-width: 42.083vw;
+    max-width: 800px;
     margin: auto;
     @include display-flex(flex);
     @include flex-direction(column);
@@ -91,10 +92,10 @@
     }
 
     @include tablet {
-      max-width: 80%;
+      max-width: 570px;
     }
 
-    @include tablet-small {
+    @include mobile {
       max-width: 340px;
     }
   }
@@ -108,8 +109,8 @@
   }
 
   span {
-    width: 21px;
-    height: 21px;
+    width: 20px;
+    height: 20px;
     border-radius: 100%;
     display: block;
     margin: 0 2px;
