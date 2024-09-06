@@ -252,7 +252,7 @@ export default function Slug({
           })
           groupProductsByCategory(filteredSubCategories)
         }
-      }, 500)
+      }, 800)
     }
   }, [optionsCategories, productData.data, colorOptions])
 

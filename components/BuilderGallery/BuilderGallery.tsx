@@ -60,7 +60,7 @@ const BuilderGallery = (props: any) => {
         {data?.images?.map((link: any, index: any) => (
           <div key={index} className="slide">
             <a
-              // onClick={() => handleImageClick(link.image)}
+              onClick={() => handleImageClick(link.image)}
             >
               <img
                 src={link.image}
