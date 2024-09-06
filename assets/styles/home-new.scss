@@ -114,5 +114,10 @@
     border-radius: 100%;
     display: block;
     margin: 0 2px;
+    @include mobile {
+      width: 12px;
+      height: 12px;
+      margin: 0 1px;
+    }
   }
 }

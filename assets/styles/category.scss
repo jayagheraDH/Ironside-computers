@@ -290,7 +290,7 @@
       -webkit-backdrop-filter: blur(7px);
       position: relative;
 
-      @include mobile {
+      @include tablet-small {
         width: 124px;
         height: 124px;
       }
@@ -304,7 +304,7 @@
         height: 72px;
         display: block;
 
-        @include mobile {
+        @include tablet-small {
           background-size: 48px 53px;
           width: 48px;
           height: 53px;
@@ -656,7 +656,7 @@
       width: 25%;
     }
 
-    @include mobile {
+    @include tablet-small {
       width: 50%;
       padding: 7px;
     }
@@ -668,7 +668,7 @@
         width: 50%;
       }
 
-      @include mobile {
+      @include tablet-small {
         width: 100%;
       }
     }
@@ -676,6 +676,10 @@
     li {
       font-size: 15px;
       line-height: 15px;
+      @include mobile {
+        font-size: 13px;
+        line-height: 15.21px;
+      }
     }
 
     p {
@@ -685,8 +689,8 @@
       @extend .ls-96;
 
       @include mobile {
-        font-size: 12px;
-        line-height: 12px;
+        font-size: 13px;
+        line-height: 15.21px;
       }
     }
   }
@@ -941,6 +945,7 @@
         @include mobile-small {
           min-width: 100%;
           padding: 20px;
+          min-height: 250px;
         }
       }
     }
@@ -995,6 +1000,9 @@
     &.\32 {
       .slick-list {
         justify-content: center;
+        @include tablet-small {
+          justify-content: flex-start;
+        }
       }
     }
 
@@ -1036,6 +1044,10 @@
       font-weight: 400;
       letter-spacing: -1.625px;
       font-family: var(--secondary-fonts);
+      @include mobile {
+        font-size: 11px;
+        line-height: 11px;
+      }
     }
   }
 }
@@ -1046,6 +1058,7 @@
 
   @include mobile {
     padding-top: 0;
+    margin-top: 0;
   }
 }
 
@@ -1333,6 +1346,7 @@
 
 .productCardContent {
   padding: 0 6px;
+  @include align-item(flex-end);
 
   > div:first-child {
     max-width: 400px;

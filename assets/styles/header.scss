@@ -15,7 +15,7 @@ body {
         }
 
         @include mobile {
-          padding: 62px 30px 0;
+          padding: 68px 30px 0;
         }
       }
     }
@@ -147,7 +147,7 @@ body {
 
   @include desktop-small {
     display: none;
-    padding: 9px 10px;
+    padding: 12px 10px;
   }
 
   @include tablet-small {
@@ -268,6 +268,13 @@ body {
           0px 0px 41.218406677246094px $color-white,
           0px 0px 70.66012573242188px $color-white,
           0px 0px 123.65522003173828px $color-white;
+      }
+    }
+    @include mobile {
+      &:hover {
+        .mega-menu-heading {
+          text-shadow: none;
+        }
       }
     }
   }
