@@ -70,12 +70,6 @@ body {
       font-size: 24px;
       line-height: 24px;
     }
-
-    // @include tablet {
-    //   font-size: 18px;
-    //   line-height: 18px;
-    //   margin-bottom: 11px;
-    // }
   }
 
   h3,
@@ -180,7 +174,7 @@ body {
     font-size: 16px;
     line-height: 18.72px;
     letter-spacing: 0.96px;
-    // font-family: var(--body-fonts);
+
     @include mobile {
       font-size: 13px;
       line-height: 13px;
@@ -215,7 +209,6 @@ body {
   letter-spacing: -3.6px;
   color: var(--secondary);
   font-family: var(--heading-fonts);
-  // @extend .text-shadow;
   margin-bottom: 45px;
 
   @include desktop-small {
@@ -225,9 +218,6 @@ body {
     letter-spacing: -2.4px;
   }
 
-  // @include tablet {
-  // letter-spacing: 0;
-  // }
   @include mobile {
     font-size: 24px;
     line-height: 24px;
@@ -412,9 +402,7 @@ button {
 .btn,
 p,
 a,
-img // div
-
-  {
+img {
   box-shadow: none !important;
 
   &:focus-visible {
@@ -425,18 +413,6 @@ img // div
     background: transparent;
     outline: 0;
   }
-}
-
-// Button Style
-
-body[data-theme='dark'] {
-  // .Layout_root___g0be {
-  //   background-color: #101010;
-  // }
-  // .btn {
-  //   color: var(--secondary);
-  //   background-color: transparent;
-  // }
 }
 
 body[data-theme='light'] {
@@ -478,8 +454,8 @@ body[data-theme='light'] {
 
   @include tablet-small {
     min-width: 134px;
-    // padding: 19px 10px;
   }
+
   @include mobile {
     font-size: 11px;
   }
@@ -542,34 +518,15 @@ button.btn,
   }
 
   @include mobile {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: -1.34px;
-    line-height: 14px;
-    padding: 8.5px 10px;
+    line-height: 13px;
+    padding: 20.5px 47.5px;
   }
 
-  // &:after {
-  //   content: '';
-  //   // width: 100%;
-  //   border: 1px solid var(--secondary);
-  //   border-radius: 79px;
-  //   width: 0;
-  //   height: 100%;
-  //   visibility: hidden;
-  //   display: block;
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  // }
   &:hover {
     background-color: var(--theme-bg);
-    // color: var(--secondary);
     border-color: var(--secondary);
-    // &:after {
-    //   transition: 0.5s;
-    //   visibility: visible;
-    //   width: 100%;
-    // }
   }
 
   &[disabled],
@@ -596,7 +553,6 @@ button.btn,
 
   .loading-dots span {
     background-color: var(--secondary);
-    // stroke: var(--secondary);
   }
 }
 
@@ -735,7 +691,7 @@ textarea {
   @extend .align-start;
   z-index: 8;
 
-  @include mobile{
+  @include mobile {
     width: 90%;
     bottom: 80px;
     left: 50%;
@@ -818,7 +774,6 @@ body .Layout_root___g0be {
 
 .slick-slider {
   position: relative;
-  // overflow: hidden;
   width: 100%;
 
   .slick-list {
@@ -833,7 +788,6 @@ body .Layout_root___g0be {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    // bottom: 0;
     font-size: 0;
     line-height: 0;
 
@@ -894,13 +848,11 @@ body .Layout_root___g0be {
       left: -10px;
       font-size: 0;
       transform: rotate(180deg);
-      // @extend .arrow-left;
     }
 
     &.slick-next {
       right: -10px;
       font-size: 0;
-      // @extend .arrow-right;
     }
   }
 }
@@ -1019,6 +971,7 @@ body .Layout_root___g0be {
     padding: 48px;
     background-color: rgba(16, 16, 16, 1);
     border-color: rgba(54, 54, 54, 1);
+
     @include mobile {
       max-height: 76.5%;
       padding: 24px;
@@ -1027,12 +980,12 @@ body .Layout_root___g0be {
 }
 
 body[data-theme='light'] {
-  .product-modal{
+  .product-modal {
     background-color: rgba(255, 255, 255, 1);
     border-color: rgba(0, 0, 0, 0.5);
 
-    .product-description{
-      p{
+    .product-description {
+      p {
         color: rgba(0, 0, 0, 1);
       }
     }

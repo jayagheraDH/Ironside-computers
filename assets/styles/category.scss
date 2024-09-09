@@ -246,11 +246,9 @@
   text-align: center;
 
   .video-played {
-    // visibility: hidden;
     opacity: 0;
 
     &:hover {
-      // visibility: visible;
       opacity: 1;
     }
 
@@ -805,7 +803,6 @@
     line-height: 40px;
     font-family: var(--head-fonts);
     font-weight: 400;
-    // margin-top: -48px;
 
     @include tablet-small {
       font-size: 30px;
@@ -833,10 +830,6 @@
 
   .desc + .learn-more {
     margin-top: 0;
-
-    // a {
-    //   font-weight: 400;
-    // }
 
     @include tablet-small {
       margin-top: 0;
@@ -960,7 +953,6 @@
   .slick-track {
     @extend .d-flex;
     @extend .align-start;
-    // margin: 0 -6px;
   }
 
   .slick-arrow {
