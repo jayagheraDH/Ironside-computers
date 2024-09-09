@@ -480,6 +480,9 @@ body[data-theme='light'] {
     min-width: 134px;
     // padding: 19px 10px;
   }
+  @include mobile {
+    font-size: 11px;
+  }
 
   &:hover {
     background-color: var(--theme-bg);
@@ -540,7 +543,9 @@ button.btn,
 
   @include mobile {
     font-size: 14px;
+    letter-spacing: -1.34px;
     line-height: 14px;
+    padding: 8.5px 10px;
   }
 
   // &:after {

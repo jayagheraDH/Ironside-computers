@@ -43,8 +43,10 @@ const CartOrderItem = ({
                 </span>
               </div>
             ) : (
-              <span className="cart-list-name">{item.name}</span>
-            )}
+              <>
+                <span className="item-label">Product</span>
+                <span className="cart-list-name">{item.name}</span>
+              </>)}
             <div className="ml-auto flex flex-col text-base">
               <span className="item-label">Total</span>
               <span className="item-price">

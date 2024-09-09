@@ -12,6 +12,8 @@ const BuilderGallery = (props: any) => {
     slidesToScroll: 1,
     variableWidth: true,
     swipeToSlide: true,
+    centerMode: true,
+    centerPadding: "90px",
     rows: 2,
     arrows: false,
     responsive: [

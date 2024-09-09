@@ -58,20 +58,29 @@ const MobileMenu = ({ data, mobileMenu }: any) => {
                     {menu === 'about' && (
                       <div className="menu-description">
                         <div className="sub-menu-heading">
-                          {menu}
                           <span
                             className={`category-heading ${
                               clicked === menu ? `close` : 'is-open'
                             }`}
                             onClick={() => {
                               clicked === menu
-                                ? setClicked('')
-                                : setClicked(menu)
+                              ? setClicked('')
+                              : setClicked(menu)
                             }}
                             role="button"
-                          >
+                            >
                             <ArrowLeft />
                           </span>
+                          {menu}
+                          <p
+                            className="close mb-0"
+                            onClick={() => {
+                              mobileMenu()
+                              setClicked('')
+                            }}
+                          >
+                            <Cross />
+                          </p>
                         </div>
                         <div className="mega-menu about-menu">
                           <div className="mega-menu-content-box">

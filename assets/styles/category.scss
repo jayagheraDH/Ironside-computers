@@ -372,8 +372,9 @@
   }
 
   .slick-list {
-    padding: 85px 0 76px 79px;
-    margin: 0 88px;
+    padding-top: 85px !important;
+    padding-bottom: 76px !important;
+    margin: 0;
     border: 1px solid var(--border-1);
     border-radius: 9px;
 
@@ -431,6 +432,11 @@
     }
     h4 {
       margin-top: 8px;
+      word-break: break-all;
+      @include mobile {
+        font-size: 12px;
+        line-height: 12px;
+      }
     }
   }
 }
@@ -926,7 +932,7 @@
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         width: 100%;
-        padding: 30px;
+        padding: 28px;
         min-width: 14.271vw;
         max-width: 14.271vw;
         min-height: 374px;
