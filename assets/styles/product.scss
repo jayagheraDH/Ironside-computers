@@ -1,6 +1,6 @@
 .colorPalette {
-  width: 27px;
-  height: 27px;
+  width: 25px;
+  height: 25px;
   display: block;
   border-radius: 29px;
 
@@ -298,6 +298,9 @@
   .customize-header {
     border-bottom: 1px solid var(--hover-1);
     padding-bottom: 5px;
+    div.flex {
+      margin-top: 2px;
+    }
   }
 
   .level-name {
@@ -400,7 +403,8 @@
       @include display-flex(flex);
       @include flex-direction(column);
       @include justify-content(space-between);
-      width: calc(100% - 214px);
+      width: auto;
+      padding-right: 10px;
       height: 100%;
 
       @include mobile-small {
@@ -453,6 +457,7 @@
     cursor: pointer;
     font-size: 24px;
     font-weight: 700;
+    color: #909090;
 
     @include mobile-small {
       line-height: 0;
@@ -465,7 +470,8 @@
   .sizes {
     @include display-flex(flex);
     @include flex-direction(row);
-    @include justify-content(flex-end);
+    @include justify-content(center);
+    @include flex-wrap(wrap);
 
     span:not(.stock) {
       font-size: 12px;

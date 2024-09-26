@@ -142,7 +142,6 @@
 .cart-page {
   &-left {
     width: 775px;
-    // order: -1;
     display: inline-block;
 
     @include tablet {
@@ -199,7 +198,7 @@
 .checkout-btn a {
   max-width: 269px;
   margin: auto;
-  padding: 27px;
+  padding: 22px;
 }
 
 [data-theme='light'] {

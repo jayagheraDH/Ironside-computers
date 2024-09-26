@@ -2,9 +2,9 @@ const Moon = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="26"
-      height="26"
-      viewBox="0 0 26 26"
+      width="25"
+      height="25"
+      viewBox="0 0 25 25"
     >
       <path
         fill-rule="evenodd"

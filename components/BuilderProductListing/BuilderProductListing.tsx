@@ -152,7 +152,7 @@ const BuilderProductListing = (props: any) => {
           alt={data?.modelName}
         />
         <div className="level-listing">
-          <Slider {...settings} className="level list-none flex align-v-center">
+          <Slider {...settings} className={"level list-none flex align-v-center " + data?.level?.length}>
             {data?.level?.map((level: any, index: any) => {
               const splitDescription = level?.levelDescription.split(',')
               return (

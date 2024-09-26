@@ -314,7 +314,7 @@ const OrderHistory = ({ data, currency }: any) => {
                             <h2>{order?.status}</h2>
                             <span className="item-eta">ETA 6/2/23</span>
                           </div>
-                          <button className="btn">Info</button>
+                          <button className="btn">Track</button>
                         </div>
                       </div>
                     </li>

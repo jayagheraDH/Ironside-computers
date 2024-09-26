@@ -12,6 +12,8 @@ const BuilderGallery = (props: any) => {
     slidesToScroll: 1,
     variableWidth: true,
     swipeToSlide: true,
+    centerMode: true,
+    centerPadding: "90px",
     rows: 2,
     arrows: false,
     responsive: [
@@ -26,14 +28,25 @@ const BuilderGallery = (props: any) => {
       {
         breakpoint: 1280,
         settings: {
+          centerMode: false,
           slidesToShow: 5,
           slidesToScroll: 1,
           variableWidth: true,
         },
       },
       {
+        breakpoint: 1023,
+        settings: {
+          centerMode: true,
+          centerPadding: "90px",
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
         breakpoint: 768,
         settings: {
+          centerMode: false,
           slidesToShow: 4,
           slidesToScroll: 1,
           variableWidth: true,
@@ -43,6 +56,7 @@ const BuilderGallery = (props: any) => {
         breakpoint: 480,
         settings: {
           rows: 4,
+          centerMode: false,
           slidesToShow: 3,
           slidesToScroll: 1,
           variableWidth: true,
@@ -60,8 +74,6 @@ const BuilderGallery = (props: any) => {
         {data?.images?.map((link: any, index: any) => (
           <div key={index} className="slide">
             <a
-              href="javascript.void(0)"
-              target="_blank"
               onClick={() => handleImageClick(link.image)}
             >
               <img

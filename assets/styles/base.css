@@ -10,6 +10,7 @@
   --text-base: #000000;
   --text-primary: #000000;
   --text-secondary: white;
+  --text-heading: #FFF1F1;
   --navigations: rgba(0, 0, 0, 0.80);
   --hover: rgba(0, 0, 0, 0.075);
   --hover-1: rgba(0, 0, 0, 0.05);
@@ -75,6 +76,7 @@
   --text-base: white;
   --text-primary: white;
   --text-secondary: black;
+  --text-heading: #FFF1F1;
   --navigations: rgba(255, 255, 255, 0.80);
   --hover: rgba(255, 255, 255, 0.075);
   --hover-1: rgba(255, 255, 255, 0.10);

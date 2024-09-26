@@ -116,12 +116,22 @@ h1.Text_pageHeading__VhZNf {
     }
   }
 
+  .btn {
+    @include tablet {
+      min-width: 120px;
+    }
+
+    @include mobile {
+      min-width: auto;
+    }
+  }
+
   .addresses-box {
     .addresses-grid {
       display: inline-flex;
       @extend .flex-wrap;
-      width: calc(100% - 212px);
       margin: 0 -6px;
+      width: calc(100% - 140px);
 
       @include desktop-small {
         width: calc(100% - 140px);
@@ -132,19 +142,13 @@ h1.Text_pageHeading__VhZNf {
         margin: 0;
       }
 
-      @include mobile {
-      }
+      @include mobile {}
 
       &.new-address {
-        width: calc(100% - 212px);
         margin: 0 -6px;
         max-width: none;
 
-        @include desktop-small {
-          width: 100%;
-        }
-
-        > div:not(.account-grid) {
+        >div:not(.account-grid) {
           width: 100%;
           height: inherit;
         }
@@ -168,7 +172,7 @@ h1.Text_pageHeading__VhZNf {
             }
           }
 
-          > div:last-child {
+          >div:last-child {
             &.mt-auto {
               margin-top: 20px;
               width: 100%;
@@ -186,7 +190,7 @@ h1.Text_pageHeading__VhZNf {
         }
       }
 
-      > div {
+      >div {
         padding: 0 10px 20px;
         width: 50%;
 
@@ -253,8 +257,8 @@ h1.Text_pageHeading__VhZNf {
 
   .my-info {
     svg {
-      width: 27px;
-      height: 31px;
+      width: 28px;
+      height: 32px;
 
       @include mobile {
         width: 21px;
@@ -283,6 +287,7 @@ h1.Text_pageHeading__VhZNf {
 
   &.maxw-260 {
     max-width: 90%;
+
     @include mobile {
       max-width: 100%;
     }
@@ -391,6 +396,7 @@ h1.Text_pageHeading__VhZNf {
   max-width: 360px;
   position: sticky;
   top: 48px;
+
   @include tablet-small {
     position: unset;
   }
@@ -400,6 +406,7 @@ h1.Text_pageHeading__VhZNf {
     max-height: 400px;
     @include display-flex(flex);
     margin: auto;
+
     @include mobile {
       width: 203px;
       height: 290px;
@@ -409,10 +416,12 @@ h1.Text_pageHeading__VhZNf {
       object-fit: contain;
     }
   }
+
   .slick-arrow {
     &.slick-prev {
       left: 18px;
     }
+
     &.slick-next {
       right: 18px;
     }
@@ -444,13 +453,14 @@ h1.Text_pageHeading__VhZNf {
 
 .product-modal {
   padding-top: 0;
-  > div {
+
+  >div {
     padding-bottom: 48px;
   }
 
   @include tablet-small {
     @include justify-content(center);
-    overflow: auto;
+    overflow-y: auto;
   }
 
   .slick-list {
@@ -461,12 +471,15 @@ h1.Text_pageHeading__VhZNf {
   .product-thumbnail {
     width: 350px;
   }
+
   .product-thumbnails {
     margin-top: 8px;
+
     @include mobile {
       padding-top: 48px;
       padding: 0 40px;
     }
+
     .slick-slide {
       margin: 0 2.5px;
 
@@ -477,6 +490,7 @@ h1.Text_pageHeading__VhZNf {
         background-color: rgba(56, 56, 56, 1);
         border-radius: 9px;
         mix-blend-mode: multiply;
+
         @include mobile {
           width: 51px;
           height: 51px;
@@ -487,7 +501,7 @@ h1.Text_pageHeading__VhZNf {
     }
   }
 
-  > div > div {
+  >div>div {
     display: inline-block;
     vertical-align: top;
 
@@ -495,18 +509,22 @@ h1.Text_pageHeading__VhZNf {
       width: 100%;
     }
   }
+
   .product-thumbnail-content {
     width: calc(100% - 350px);
+
     @include tablet-small {
       margin-top: 40px;
       width: 100%;
     }
+
     &-heading {
       padding-top: 48px;
       position: sticky;
       top: 0;
       @include display-flex(flex);
       @include flex-direction(column);
+
       &:before {
         content: '';
         width: 100%;
@@ -532,6 +550,7 @@ h1.Text_pageHeading__VhZNf {
       font-family: var(--heading-fonts);
       z-index: 2;
       margin-bottom: 0;
+
       @include tablet {
         font-size: 25px;
         line-height: 25px;
@@ -550,13 +569,16 @@ h1.Text_pageHeading__VhZNf {
   overflow: auto;
   height: 235px;
   border-bottom: 1px solid #525252;
-  > .head {
+
+  >.head {
     position: sticky;
     top: 0;
     @include display-flex(flex);
+
     span {
       z-index: 4;
     }
+
     &:before {
       content: '';
       width: 100%;
@@ -575,7 +597,7 @@ h1.Text_pageHeading__VhZNf {
 }
 
 // Order Details
-.account-pages .addresses-box .addresses-grid > div.order-details {
+.account-pages .addresses-box .addresses-grid>div.order-details {
   width: 100%;
 }
 
@@ -589,7 +611,7 @@ h1.Text_pageHeading__VhZNf {
     span {
       @extend .fs-32;
       color: var(--secondary);
-      font-family: var(--heading-fonts);
+      font-family: var(--head-fonts);
       display: block;
     }
   }
@@ -606,6 +628,10 @@ h1.Text_pageHeading__VhZNf {
       &:last-child {
         padding-right: 0;
         width: 105px;
+
+        @include mobile {
+          width: auto;
+        }
       }
 
       span {
@@ -681,7 +707,12 @@ h1.Text_pageHeading__VhZNf {
   .cart-listing-item {
     background-color: #222;
 
-    + .about-spacer {
+    @include tablet {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    +.about-spacer {
       margin-top: 30px;
 
       @include mobile-small {
@@ -718,6 +749,10 @@ h1.Text_pageHeading__VhZNf {
   h2 {
     @extend .fs-16;
     margin-bottom: 28px;
+    @include mobile {
+      font-size: 16px;
+      line-height: 11px;
+    }
   }
 
   &-left {
@@ -733,7 +768,7 @@ h1.Text_pageHeading__VhZNf {
       order: 1;
     }
 
-    > div {
+    >div {
       @include tablet {
         width: 50%;
         padding: 40px;
@@ -744,7 +779,7 @@ h1.Text_pageHeading__VhZNf {
         padding: 0;
       }
 
-      + div {
+      +div {
         @include mobile {
           order: 1;
           margin-top: 45px;
@@ -760,7 +795,7 @@ h1.Text_pageHeading__VhZNf {
         max-width: none;
       }
 
-      + p {
+      +p {
         max-width: 210px;
         font-weight: 500;
 
@@ -870,6 +905,10 @@ h1.Text_pageHeading__VhZNf {
 .cart-item-left {
   width: calc(100% - 264px);
 
+  @include tablet-small {
+    width: calc(100% - 244px);
+  }
+
   @include mobile-small {
     width: 100%;
   }
@@ -878,6 +917,10 @@ h1.Text_pageHeading__VhZNf {
 .cart-item-right {
   width: 222px;
   margin-left: 42px;
+
+  @include tablet-small {
+    margin-left: 20px;
+  }
 
   @include mobile-small {
     width: 100%;
@@ -898,7 +941,9 @@ h1.Text_pageHeading__VhZNf {
     @include tablet-small {
       padding-top: 12px;
       padding-left: 0;
-      display: block;
+      @include display-flex(flex);
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
     }
 
     .cart-item-detail-image {
@@ -918,6 +963,7 @@ h1.Text_pageHeading__VhZNf {
       font-weight: 400;
       text-transform: capitalize;
       margin-bottom: 0;
+      font-family: var(--head-fonts);
 
       @include tablet-small {
         font-size: 16px;
@@ -936,6 +982,7 @@ h1.Text_pageHeading__VhZNf {
         width: 100%;
         margin-top: 12px;
         text-transform: lowercase;
+        padding: 12.5px;
       }
     }
   }
@@ -1040,8 +1087,8 @@ h1.Text_pageHeading__VhZNf {
     display: inline-block;
 
     @include tablet-small {
-      width: 122px;
-      margin: auto;
+      width: 120px;
+      margin: 0;
     }
 
     @include mobile {
@@ -1055,21 +1102,24 @@ h1.Text_pageHeading__VhZNf {
   @include display-flex(flex);
   @include justify-content(space-between);
   width: calc(100% - 397px);
-  padding-left: 39px;
+
+  // padding-left: 39px;
   @include tablet {
     width: calc(100% - 338px);
-    padding-left: 10px;
+    // padding-left: 10px;
   }
 
   @include tablet-small {
     padding-top: 15px;
     width: calc(100% - 122px);
-    display: inline-block;
+    // display: inline-block;
     padding-left: 6px;
     padding-right: 26px;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
   }
 
-  > div {
+  >div {
     @include display-flex(flex);
     @include flex-direction(column);
     @include justify-content(center);
@@ -1078,10 +1128,32 @@ h1.Text_pageHeading__VhZNf {
       width: 50%;
       display: inline-block;
 
-      &:nth-child(3),
-      &:nth-child(4) {
+      &:nth-child(2),
+      &:nth-child(3) {
         margin-top: 20px;
       }
+
+      &:first-child {
+        order: 0;
+      }
+
+      &:nth-child(2) {
+        order: 3;
+      }
+
+      &:nth-child(3) {
+        order: 2;
+      }
+
+      &:nth-child(4) {
+        order: 1;
+      }
+    }
+  }
+
+  .btn {
+    @include tablet-small {
+      order: 4;
     }
   }
 
@@ -1093,14 +1165,13 @@ h1.Text_pageHeading__VhZNf {
 }
 
 .sponsorship-gallery {
-  > div:first-child {
+  >div:first-child {
     margin: 0 88px;
   }
 }
 
 .history-detail {
   .cart-item-detail-image {
-    width: 100px;
 
     img {
       width: 74px;
@@ -1111,5 +1182,9 @@ h1.Text_pageHeading__VhZNf {
   .cart-item-detail-heading {
     width: calc(100% - 100px);
     margin-right: 0;
+
+    @include tablet-small {
+      width: calc(100% - 80px);
+    }
   }
 }
