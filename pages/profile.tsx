@@ -130,14 +130,21 @@ export default function Profile({
                   </li>
                   <li
                     className={profileTab === 'affiliate' ? 'is-selected' : ''}
-                    onClick={() => setIsSelected(!isSelected)}
+                    onClick={() =>
+                      window.open(
+                        'https://www.affiliatly.com/login.html?affiliates=1',
+                        '_blank'
+                      )
+                    }
                   >
                     Affiliate Portal
                   </li>
                 </ul>
               </div>
               {profileTab === 'accountDetails' && <AccountDetails />}
-              {profileTab === 'orderHistory' && <OrderHistory data={data} currency={currency} />}
+              {profileTab === 'orderHistory' && (
+                <OrderHistory data={data} currency={currency} />
+              )}
               {profileTab === 'addresses' && (
                 <Addresses
                   updateAddressOpen={updateAddressOpen}
