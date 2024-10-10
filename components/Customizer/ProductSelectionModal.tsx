@@ -44,46 +44,51 @@ const ProductSelectionModal = ({
   }
 
   const handleColorSelection = (data: any, color: { node: any }) => {
+    let isStockOut = false
     colorOpts?.forEach((option: any) => {
       if (option.entityId == color?.node.value.split(',')[2]) {
         if (!option?.variants.edges[0].node.inventory.isInStock) {
+          isStockOut = true
           notify()
           return
-        }
-        const colorSelection = [...defaultColors]
-        colorSelection?.forEach((clr: any) => {
-          if (clr?.entityId === data?.entityId) clr['color'] = option
-        })
-        const hasMemoryCategory = colorSelection?.some(
-          (item: any) =>
-            item.categoryName === data?.categories?.edges[0]?.node?.name
-        )
-        if (!hasMemoryCategory) {
-          const temp = {
-            entityId: data?.entityId,
-            categoryName: data?.categories?.edges[0]?.node?.name,
-            price: data?.prices.price.value,
-            color: option,
-          }
-          colorSelection.push(temp)
-          setDefaultColors([...colorSelection])
         } else {
-          setDefaultColors([...colorSelection])
+          const colorSelection = [...defaultColors]
+          colorSelection?.forEach((clr: any) => {
+            if (clr?.entityId === data?.entityId) clr['color'] = option
+          })
+          const hasMemoryCategory = colorSelection?.some(
+            (item: any) =>
+              item.categoryName === data?.categories?.edges[0]?.node?.name
+          )
+          if (!hasMemoryCategory) {
+            const temp = {
+              entityId: data?.entityId,
+              categoryName: data?.categories?.edges[0]?.node?.name,
+              price: data?.prices.price.value,
+              color: option,
+            }
+            colorSelection.push(temp)
+            setDefaultColors([...colorSelection])
+          } else {
+            setDefaultColors([...colorSelection])
+          }
+          setIncompatibleProducts({})
+          setIncompatibleProdIds([])
+          setIncompatibleCats([])
+          onOptionSelections(
+            data?.entityId,
+            modalData?.categoryName,
+            option?.prices.price.value,
+            option
+          )
         }
-        setIncompatibleProducts({})
-        setIncompatibleProdIds([])
-        setIncompatibleCats([])
-        onOptionSelections(
-          data?.entityId,
-          modalData?.categoryName,
-          option?.prices.price.value,
-          option
-        )
       }
     })
-    setToggle(false)
-    scrollToElement(activeTab, true)
-    setModal(false)
+    if (!isStockOut) {
+      setToggle(false)
+      scrollToElement(activeTab, true)
+      setModal(false)
+    }
   }
 
   const renderPrice = (data: any) => {
@@ -95,23 +100,54 @@ const ProductSelectionModal = ({
         }
       })
     })
+    let varaintPrice = 0
     if (selectedColor?.length) {
       selectedColor.forEach((color: any) => {
         if (color?.parent_id === data?.entityId) {
-          price = color.productPrice
+          varaintPrice = color.productPrice
+        } else {
+          if (data?.customFields?.edges?.length) {
+            colorOpts?.forEach((options: any) => {
+              if (
+                data?.customFields?.edges[0]?.node?.value?.split(',')[2] ==
+                options?.entityId
+              ) {
+                varaintPrice =
+                  options?.prices.price.value - data?.prices?.price?.value
+                selectedColor.forEach((ele: any) => {
+                  if (ele?.parent_id === data?.entityId) {
+                    varaintPrice =
+                      options?.prices.price.value - ele?.productPrice
+                    if (ele?.product_name === options?.name) {
+                      varaintPrice = 0
+                    }
+                  }
+                })
+              }
+            })
+          }
         }
       })
     }
+    const finalPrice = price + varaintPrice
     return (
       <p className="case-price mb-0">
-        {price?.toString().includes('-')
-          ? convertCurrency(price)
-          : `+${convertCurrency(price)}`}
+        {finalPrice?.toString().includes('-')
+          ? convertCurrency(finalPrice)
+          : `+${convertCurrency(finalPrice)}`}
       </p>
     )
   }
 
   const renderColorPrice = (options: any, data: any) => {
+    let optionAmout = 0
+    optionSelections?.forEach((option: any) => {
+      data?.categories?.edges?.forEach((ele: any) => {
+        if (ele?.node?.name === option.category_name) {
+          optionAmout = data?.prices.price.value - option?.productPrice
+        }
+      })
+    })
     let price: any = options?.prices.price.value - data?.prices?.price?.value
     selectedColor.forEach((ele: any) => {
       if (ele?.parent_id === data?.entityId) {
@@ -121,12 +157,13 @@ const ProductSelectionModal = ({
         }
       }
     })
-    if (price?.toString().includes('-')) {
+    const finalPrice = price + optionAmout
+    if (finalPrice?.toString().includes('-')) {
       if (price === undefined) return
-      return <span> {convertCurrency(price)}</span>
+      return <span> {convertCurrency(finalPrice)}</span>
     } else {
       if (price === undefined) return
-      return <span> +{convertCurrency(price)}</span>
+      return <span> +{convertCurrency(finalPrice)}</span>
     }
   }
 

@@ -34,6 +34,7 @@ interface Props {
   themeColor: boolean
   colorOpts?: number[]
   currency?: any
+  productsFetched?: number
 }
 
 declare let window: any
@@ -46,6 +47,7 @@ const Cutomizer: FC<Props> = (props) => {
     themeColor,
     colorOpts,
     currency,
+    productsFetched,
   }: any = props
   const {
     selectedIds,
@@ -391,7 +393,7 @@ const Cutomizer: FC<Props> = (props) => {
           }
         }
       }
-    }, 6000)
+    }, 8000)
   }, [])
   useEffect(() => {
     {
@@ -460,7 +462,7 @@ const Cutomizer: FC<Props> = (props) => {
           ],
         }}
       />
-      {!!categoriesDataFiltered?.length ? (
+      {categoriesDataFiltered?.length === productsFetched ? (
         <div className="customizer">
           <div
             className="customizer-product flex flex-wrap align-v-center"

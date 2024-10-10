@@ -90,20 +90,33 @@ export default function Slug({
   optionsCategories,
   header,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [productDetail, setProductDetail] = useState(product)
   const [themeColor, setThemeColor] = useState(false)
   const [groupedProducts, setGroupedProducts] = useState<any[]>([])
   const [colorOpts, setColorOpts] = useState<any[]>([])
   const [currency, setCurrency] = useState<any>({})
-  optionsCategories.forEach((category) => {
+  let productsFetched = 0
+
+  const productData = useSearch({
+    search: `${productDetail?.entityId}`,
+    sort: '',
+  })
+
+  const { data: colorOptions } = useSearch({
+    categoryId: 209,
+  })
+
+  optionsCategories?.forEach((category: any) => {
     const uniqueValueIds = new Set(
-      category.productCategories.map((item: any) => item.entityId)
+      category?.productCategories?.map((item: any) => item.entityId)
     )
     const commaSeparatedString = Array.from(uniqueValueIds).join(',')
     const products = useSearch({
       categoryId: commaSeparatedString,
     })
     if (products?.data?.found) {
-      category.productCategories.forEach((subs: any) => {
+      productsFetched++
+      category?.productCategories?.forEach((subs: any) => {
         let catProds: any = []
         products?.data?.products?.map((prods: any) => {
           const mouseNode = prods?.node?.categories?.edges.find(
@@ -116,15 +129,6 @@ export default function Slug({
         if (catProds?.length) subs.products = catProds
       })
     }
-  })
-
-  const productData = useSearch({
-    search: `${product?.entityId}`,
-    sort: '',
-  })
-
-  const { data: colorOptions } = useSearch({
-    categoryId: 209,
   })
 
   const groupProductsByCategory = (originalData: any) => {
@@ -167,6 +171,19 @@ export default function Slug({
     }
     setGroupedProducts(groupedData)
   }
+  const checkThemeColor = (dark: boolean) => {
+    if (dark == true) {
+      document.querySelector('#body')?.setAttribute('data-theme', 'light')
+      setThemeColor(true)
+    } else {
+      setThemeColor(false)
+      document.querySelector('#body')?.setAttribute('data-theme', 'dark')
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    document.querySelector('html')?.removeAttribute('data-theme')
+  }
 
   useEffect(() => {
     let filteredProductData: any = []
@@ -174,87 +191,89 @@ export default function Slug({
       productData.data?.products[0]?.node?.productOptions?.edges
     if (optionsProduct) {
       setTimeout(() => {
-        optionsCategories?.forEach((data) => {
-          data?.productCategories?.forEach((category: any) => {
-            if (category?.products?.length) {
-              category.products.forEach((productCat: any) => {
-                optionsProduct?.forEach((ele: any) => {
-                  data?.category,
-                    ele?.node?.values?.edges?.forEach((filterProduct: any) => {
-                      if (
-                        productCat.node.entityId ===
-                        filterProduct.node.productId
-                      ) {
-                        filteredProductData.push({
-                          category: data?.category,
-                          subCategories: [
-                            {
-                              categoryName: category?.name,
-                              products: productCat.node,
-                            },
-                          ],
-                        })
-                      }
-                    })
-                })
-              })
-            }
-          })
-        })
-
-        const categoriesDataFiltered = (filteredProductData || []).reduce(
-          (
-            accumulator: { categoryName: any; subCategories: any[] }[],
-            item: { category: any; subCategories: any }
-          ) => {
-            const { category, subCategories } = item
-            const existingCategory = accumulator.find(
-              (existingCategory: { categoryName: any }) =>
-                existingCategory.categoryName === category
-            )
-
-            if (existingCategory) {
-              existingCategory.subCategories?.push(subCategories[0])
-            } else {
-              accumulator.push({
-                categoryName: category,
-                subCategories: [subCategories[0]],
-              })
-            }
-
-            return accumulator
-          },
-          []
-        )
-
-        if (categoriesDataFiltered.length) {
-          const filteredSubCategories: any[] = []
-          categoriesDataFiltered?.forEach((cat: any) => {
-            let sortedSubCats: any[] = []
-            product?.productOptions?.edges?.forEach((opts: any) => {
-              opts?.node?.values?.edges?.forEach((prod: any) => {
-                cat?.subCategories?.forEach((subs: any) => {
-                  if (subs?.categoryName === opts?.node?.displayName) {
-                    if (prod?.node?.productId === subs?.products?.entityId) {
-                      sortedSubCats.push({
-                        categoryName: subs?.categoryName,
-                        products: subs?.products,
+      optionsCategories?.forEach((data: any) => {
+        data?.productCategories?.forEach((category: any) => {
+          if (category?.products?.length) {
+            category.products.forEach((productCat: any) => {
+              optionsProduct?.forEach((ele: any) => {
+                data?.category,
+                  ele?.node?.values?.edges?.forEach((filterProduct: any) => {
+                    if (
+                      productCat.node.entityId === filterProduct.node.productId
+                    ) {
+                      filteredProductData.push({
+                        category: data?.category,
+                        subCategories: [
+                          {
+                            categoryName: category?.name,
+                            products: productCat.node,
+                          },
+                        ],
                       })
                     }
-                  }
-                })
+                  })
               })
             })
-            filteredSubCategories.push({
-              categoryName: cat?.categoryName,
-              subCategories: sortedSubCats,
+          }
+        })
+      })
+
+      const categoriesDataFiltered = (filteredProductData || []).reduce(
+        (
+          accumulator: { categoryName: any; subCategories: any[] }[],
+          item: { category: any; subCategories: any }
+        ) => {
+          const { category, subCategories } = item
+          const existingCategory = accumulator.find(
+            (existingCategory: { categoryName: any }) =>
+              existingCategory.categoryName === category
+          )
+
+          if (existingCategory) {
+            existingCategory.subCategories?.push(subCategories[0])
+          } else {
+            accumulator.push({
+              categoryName: category,
+              subCategories: [subCategories[0]],
+            })
+          }
+
+          return accumulator
+        },
+        []
+      )
+
+      if (categoriesDataFiltered.length) {
+        const filteredSubCategories: any[] = []
+        const productCats = Object.assign({}, productDetail)
+        categoriesDataFiltered?.forEach((cat: any) => {
+          let sortedSubCats: any[] = []
+          productCats?.productOptions?.edges?.forEach((opts: any) => {
+            opts?.node?.values?.edges?.forEach((prod: any) => {
+              cat?.subCategories?.forEach((subs: any) => {
+                if (subs?.categoryName === opts?.node?.displayName) {
+                  if (prod?.node?.productId === subs?.products?.entityId) {
+                    sortedSubCats.push({
+                      categoryName: subs?.categoryName,
+                      products: subs?.products,
+                    })
+                  }
+                }
+              })
             })
           })
-          groupProductsByCategory(filteredSubCategories)
-        }
+          filteredSubCategories.push({
+            categoryName: cat?.categoryName,
+            subCategories: sortedSubCats,
+          })
+        })
+        setProductDetail(productCats)
+        groupProductsByCategory(filteredSubCategories)
+      }
+      // setCategories(manipulateCats)
       }, 800)
     }
-  }, [optionsCategories, productData.data, colorOptions])
+  }, [productsFetched, productData.data, colorOptions])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -269,25 +288,13 @@ export default function Slug({
     })
   }, [])
 
-  const checkThemeColor = (dark: boolean) => {
-    if (dark == true) {
-      document.querySelector('#body')?.setAttribute('data-theme', 'light')
-      setThemeColor(true)
-    } else {
-      setThemeColor(false)
-      document.querySelector('#body')?.setAttribute('data-theme', 'dark')
-    }
-  }
-  if (typeof window !== 'undefined') {
-    document.querySelector('html')?.removeAttribute('data-theme')
-  }
-
   return (
     <div>
       <Header headerData={header?.data} />
       {groupedProducts && (
         <Customizer
-          product={product}
+          productsFetched={optionsCategories?.length}
+          product={productDetail}
           categoriesDataFiltered={groupedProducts}
           checkThemeColor={checkThemeColor}
           themeColor={themeColor}
