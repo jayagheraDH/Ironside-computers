@@ -47,8 +47,8 @@ const Cutomizer: FC<Props> = (props) => {
     themeColor,
     colorOpts,
     currency,
-    // productsFetched,
-  }: any = props
+  }: // productsFetched,
+  any = props
   const {
     selectedIds,
     selectedColor,
@@ -255,9 +255,14 @@ const Cutomizer: FC<Props> = (props) => {
       router.push('/cart')
     } catch (errors: any) {
       if (errors?.errors) {
-        if (errors.errors[0]?.code === 'insufficient_stock')
-          toast.error('Selected Product is currently out of stock.')
-        else toast.error('Some error occured, please try again later')
+        if (errors.errors[0]?.code === 'insufficient_stock') {
+          const stockOutItem = selectedIds.filter((item: any) => {
+            return item?.product === +errors.errors[0]?.message.split(' ')[6]
+          })
+          toast.error(
+            `${stockOutItem?.[0]?.cat} is currently out of stock.Please contact customer support for an estimated time of arrival. `
+          )
+        } else toast.error('Some error occured, please try again later')
         setLoading(false)
         return
       }
