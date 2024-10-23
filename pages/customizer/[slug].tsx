@@ -293,7 +293,7 @@ export default function Slug({
       <Header headerData={header?.data} />
       {groupedProducts && (
         <Customizer
-          productsFetched={optionsCategories?.length}
+          // productsFetched={optionsCategories?.length}
           product={productDetail}
           categoriesDataFiltered={groupedProducts}
           checkThemeColor={checkThemeColor}

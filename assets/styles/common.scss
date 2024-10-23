@@ -175,7 +175,7 @@ body {
     line-height: 18.72px;
     letter-spacing: 0.96px;
 
-    @include mobile {
+    @include tablet-small {
       font-size: 13px;
       line-height: 13px;
       letter-spacing: 0.7px;
@@ -409,7 +409,7 @@ img {
     outline: none !important;
   }
 
-  &:focus {
+  &:not(.add-to-cart):focus {
     background: transparent;
     outline: 0;
   }

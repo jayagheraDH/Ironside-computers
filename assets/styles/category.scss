@@ -1011,10 +1011,10 @@
 
     &-name {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 400;
       line-height: 20px;
       text-transform: uppercase;
-      font-family: var(--heading-fonts);
+      font-family: var(--head-fonts);
       margin-bottom: 33px;
 
       @include mobile {
