@@ -40,7 +40,12 @@ const Header = (props: any) => {
   return (
     <div className="header">
       {!!props?.sale_banner_text && (
-        <div className="sale-banner mobile" onClick={() =>{setShowModal(true)}}>
+        <div
+          className="sale-banner mobile"
+          onClick={() => {
+            setShowModal(true)
+          }}
+        >
           <p>{props?.sale_banner_text}</p>
         </div>
       )}
@@ -77,7 +82,11 @@ const Header = (props: any) => {
                     return (
                       key !== 'support' && (
                         <li key={index} className={key}>
-                          <a className="category-heading" role="button">
+                          <a
+                            href={key === 'laptops' ? '/laptops' : '/'}
+                            className="category-heading"
+                            role="button"
+                          >
                             {key}
                           </a>
                           {key === 'about' && (

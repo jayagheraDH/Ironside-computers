@@ -24,6 +24,7 @@ import WrongPassword from '@components/icons/WrongPassword'
 import usePrice from '@commerce/use-price'
 import useCart from '@framework/cart/use-cart'
 import useRemoveItem from '@framework/cart/use-remove-item'
+import Link from 'next/link'
 
 interface Props {
   className?: string
@@ -34,7 +35,7 @@ interface Props {
   themeColor: boolean
   colorOpts?: number[]
   currency?: any
-  // productsFetched?: number
+  productsFetched?: boolean
 }
 
 declare let window: any
@@ -46,9 +47,9 @@ const Cutomizer: FC<Props> = (props) => {
     checkThemeColor,
     themeColor,
     colorOpts,
+    productsFetched,
     currency,
-  }: // productsFetched,
-  any = props
+  }: any = props
   const {
     selectedIds,
     selectedColor,
@@ -467,349 +468,382 @@ const Cutomizer: FC<Props> = (props) => {
           ],
         }}
       />
-      {categoriesDataFiltered?.length ? (
-        <div className="customizer">
-          <div
-            className="customizer-product flex flex-wrap align-v-center"
-            data-lenis-prevent
-          >
-            <div className="customizer-product-left">
-              {(product.images?.edges || legacyImages)?.map(
-                (img: any, index: number) =>
-                  themeColor == false ? (
-                    <>
-                      {img?.node?.altText == 'bg-img-black' && (
-                        <div key={index}>
-                          <div
-                            className="bg-img"
-                            style={{
-                              backgroundImage: `url('${img?.node.urlOriginal}')`,
-                            }}
-                          />
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {img?.node?.altText == 'bg-img-white' && (
-                        <div key={index}>
-                          <div
-                            className="bg-img"
-                            style={{
-                              backgroundImage: `url('${img?.node.urlOriginal}')`,
-                            }}
-                          />
-                        </div>
-                      )}
-                    </>
-                  )
-              )}
+      {productsFetched ? (
+        categoriesDataFiltered?.length ? (
+          <div className="customizer">
+            <div
+              className="customizer-product flex flex-wrap align-v-center"
+              data-lenis-prevent
+            >
+              <div className="customizer-product-left">
+                {(product.images?.edges || legacyImages)?.map(
+                  (img: any, index: number) =>
+                    themeColor == false ? (
+                      <>
+                        {img?.node?.altText == 'bg-img-black' && (
+                          <div key={index}>
+                            <div
+                              className="bg-img"
+                              style={{
+                                backgroundImage: `url('${img?.node.urlOriginal}')`,
+                              }}
+                            />
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {img?.node?.altText == 'bg-img-white' && (
+                          <div key={index}>
+                            <div
+                              className="bg-img"
+                              style={{
+                                backgroundImage: `url('${img?.node.urlOriginal}')`,
+                              }}
+                            />
+                          </div>
+                        )}
+                      </>
+                    )
+                )}
 
-              <Slider
-                {...SliderSettings}
-                className="customizer-product-slider custom-slick-dots"
-              >
-                {modalImage?.map((img: any, index: number) => (
-                  <div key={index} className="img">
-                    <div>
-                      <Image
-                        priority={true}
-                        height={767}
-                        width={639}
-                        className="customizer-product-image"
-                        src={img?.node.urlOriginal!}
-                        alt={img?.node.altText || 'Product Image'}
+                <Slider
+                  {...SliderSettings}
+                  className="customizer-product-slider custom-slick-dots"
+                >
+                  {modalImage?.map((img: any, index: number) => (
+                    <div key={index} className="img">
+                      <div>
+                        <Image
+                          priority={true}
+                          height={767}
+                          width={639}
+                          className="customizer-product-image"
+                          src={img?.node.urlOriginal!}
+                          alt={img?.node.altText || 'Product Image'}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+
+              <div className="customizer-product-content flex flex-direction align-v-center">
+                <p
+                  className="themeColorChanger flex align-center justify-center mb-0 cursor-pointer"
+                  onClick={() => checkThemeColor(themeColor ? false : true)}
+                >
+                  {themeColor == false ? <Moon /> : <Sun />}
+                </p>
+
+                <div className="components w-100">
+                  <div className="default-options" id={'scroll-box'}>
+                    <div className="head flex justify-space w-100">
+                      <div>
+                        <h1>{productDescription[0]?.trim()}</h1>
+                        <p className="mb-0">{productDescription[1]?.trim()}</p>
+                      </div>
+                      <div className="flex align-v-center themeColor">
+                        <p
+                          className="flex align-center justify-center mb-0 cursor-pointer"
+                          onClick={() =>
+                            checkThemeColor(themeColor ? false : true)
+                          }
+                        >
+                          {themeColor == false ? <Moon /> : <Sun />}
+                        </p>
+                        <button
+                          className="btn btn-shadow uppercase"
+                          onClick={() => {
+                            SaveMyBuild(
+                              optionSelections,
+                              selectedColor,
+                              setBuildUrl
+                            )
+                            setSaveMyBuildModal(true)
+                          }}
+                        >
+                          Save my build
+                        </button>
+                      </div>
+                    </div>
+                    <div className="components-tabs mobile">
+                      <ul className="flex list-none">
+                        <li>
+                          <a
+                            className={
+                              activeTab === 'Aesthetics' ? 'isSelected' : ''
+                            }
+                            onClick={() => scrollToElement('Aesthetics')}
+                          >
+                            Aesthetics
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className={
+                              activeTab === 'Components' ? 'isSelected' : ''
+                            }
+                            onClick={() => scrollToElement('Components')}
+                          >
+                            Components
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className={
+                              activeTab === 'Services' ? 'isSelected' : ''
+                            }
+                            onClick={() => scrollToElement('Services')}
+                          >
+                            Services
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className={
+                              activeTab === 'Peripherals' ? 'isSelected' : ''
+                            }
+                            onClick={() => scrollToElement('Peripherals')}
+                          >
+                            Peripherals
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    {modal ? (
+                      <ProductSelectionModal
+                        optionSelections={optionSelections}
+                        setIncompatibleProducts={setIncompatibleProducts}
+                        incompatibleProdIds={incompatibleProdIds}
+                        setModal={setModal}
+                        onOptionSelections={onOptionSelections}
+                        modalData={modalData}
+                        selectedIds={selectedIds}
+                        selectedColor={selectedColor}
+                        colorOpts={colorOpts}
+                        defaultColors={defaultColors}
+                        convertCurrency={convertCurrency}
+                        setIncompatibleProdIds={setIncompatibleProdIds}
+                        setIncompatibleCats={setIncompatibleCats}
+                        scrollToElement={scrollToElement}
+                        activeTab={activeTab}
+                        setDefaultColors={setDefaultColors}
                       />
-                    </div>
-                  </div>
-                ))}
-              </Slider>
-            </div>
+                    ) : (
+                      <div>
+                        <div className="grid-btns flex justify-end">
+                          <button
+                            className={`${gridView == 'gridview'}`}
+                            onClick={() => setGridView('gridview')}
+                          >
+                            <GridIcon />
+                          </button>
+                          <button
+                            onClick={() => setGridView('listview')}
+                            className={`${gridView == 'listview'}`}
+                          >
+                            <ListIcon />
+                          </button>
+                        </div>
+                        <div className="customizerProductGrid">
+                          {!!selectedIds?.length &&
+                            categoriesDataFiltered?.map((categories: any) => (
+                              <>
+                                <h2
+                                  id={categories?.categoryName}
+                                  className="content-item"
+                                >
+                                  {categories?.categoryName}
+                                </h2>
+                                <div
+                                  className={`${
+                                    gridView == 'gridview' ? 'grid' : 'list'
+                                  }-view flex flex-wrap`}
+                                >
+                                  {categories?.subCategory?.map(
+                                    (subs: any, index: number) => (
+                                      <>
+                                        {selectedIds?.map((ele: any) =>
+                                          subs?.products?.map((prod: any) => {
+                                            if (
+                                              ele.product === prod.entityId &&
+                                              subs.categoryName === ele.cat
+                                            ) {
+                                              return (
+                                                <div
+                                                  className={`flex flex-wrap align-v-center ${
+                                                    incompatibleCats?.some(
+                                                      (cat: any) =>
+                                                        cat ===
+                                                        subs.categoryName
+                                                    ) && 'incompatible'
+                                                  }`}
+                                                  key={index}
+                                                  onClick={() => {
+                                                    onModalSelection(subs)
+                                                  }}
+                                                >
+                                                  <div className="options-image flex align-v-center justify-center">
+                                                    {!!prod?.images?.edges
+                                                      .length ? (
+                                                      <img
+                                                        className="image"
+                                                        src={loadImage(prod)}
+                                                      />
+                                                    ) : (
+                                                      <EmptyProduct />
+                                                    )}
+                                                  </div>
 
-            <div className="customizer-product-content flex flex-direction align-v-center">
-              <p
-                className="themeColorChanger flex align-center justify-center mb-0 cursor-pointer"
-                onClick={() => checkThemeColor(themeColor ? false : true)}
-              >
-                {themeColor == false ? <Moon /> : <Sun />}
-              </p>
-
-              <div className="components w-100">
-                <div className="default-options" id={'scroll-box'}>
-                  <div className="head flex justify-space w-100">
-                    <div>
-                      <h1>{productDescription[0]?.trim()}</h1>
-                      <p className="mb-0">{productDescription[1]?.trim()}</p>
-                    </div>
-                    <div className="flex align-v-center themeColor">
-                      <p
-                        className="flex align-center justify-center mb-0 cursor-pointer"
-                        onClick={() =>
-                          checkThemeColor(themeColor ? false : true)
-                        }
-                      >
-                        {themeColor == false ? <Moon /> : <Sun />}
-                      </p>
-                      <button
-                        className="btn btn-shadow uppercase"
-                        onClick={() => {
-                          SaveMyBuild(
-                            optionSelections,
-                            selectedColor,
-                            setBuildUrl
-                          )
-                          setSaveMyBuildModal(true)
-                        }}
-                      >
-                        Save my build
-                      </button>
-                    </div>
-                  </div>
-                  <div className="components-tabs mobile">
-                    <ul className="flex list-none">
-                      <li>
-                        <a
-                          className={
-                            activeTab === 'Aesthetics' ? 'isSelected' : ''
-                          }
-                          onClick={() => scrollToElement('Aesthetics')}
-                        >
-                          Aesthetics
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className={
-                            activeTab === 'Components' ? 'isSelected' : ''
-                          }
-                          onClick={() => scrollToElement('Components')}
-                        >
-                          Components
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className={
-                            activeTab === 'Services' ? 'isSelected' : ''
-                          }
-                          onClick={() => scrollToElement('Services')}
-                        >
-                          Services
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className={
-                            activeTab === 'Peripherals' ? 'isSelected' : ''
-                          }
-                          onClick={() => scrollToElement('Peripherals')}
-                        >
-                          Peripherals
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  {modal ? (
-                    <ProductSelectionModal
-                      optionSelections={optionSelections}
-                      setIncompatibleProducts={setIncompatibleProducts}
-                      incompatibleProdIds={incompatibleProdIds}
-                      setModal={setModal}
-                      onOptionSelections={onOptionSelections}
-                      modalData={modalData}
-                      selectedIds={selectedIds}
-                      selectedColor={selectedColor}
-                      colorOpts={colorOpts}
-                      defaultColors={defaultColors}
-                      convertCurrency={convertCurrency}
-                      setIncompatibleProdIds={setIncompatibleProdIds}
-                      setIncompatibleCats={setIncompatibleCats}
-                      scrollToElement={scrollToElement}
-                      activeTab={activeTab}
-                      setDefaultColors={setDefaultColors}
-                    />
-                  ) : (
-                    <div>
-                      <div className="grid-btns flex justify-end">
-                        <button
-                          className={`${gridView == 'gridview'}`}
-                          onClick={() => setGridView('gridview')}
-                        >
-                          <GridIcon />
-                        </button>
-                        <button
-                          onClick={() => setGridView('listview')}
-                          className={`${gridView == 'listview'}`}
-                        >
-                          <ListIcon />
-                        </button>
-                      </div>
-                      <div className="customizerProductGrid">
-                        {!!selectedIds?.length &&
-                          categoriesDataFiltered?.map((categories: any) => (
-                            <>
-                              <h2
-                                id={categories?.categoryName}
-                                className="content-item"
-                              >
-                                {categories?.categoryName}
-                              </h2>
-                              <div
-                                className={`${
-                                  gridView == 'gridview' ? 'grid' : 'list'
-                                }-view flex flex-wrap`}
-                              >
-                                {categories?.subCategory?.map(
-                                  (subs: any, index: number) => (
-                                    <>
-                                      {selectedIds?.map((ele: any) =>
-                                        subs?.products?.map((prod: any) => {
-                                          if (
-                                            ele.product === prod.entityId &&
-                                            subs.categoryName === ele.cat
-                                          ) {
-                                            return (
-                                              <div
-                                                className={`flex flex-wrap align-v-center ${
-                                                  incompatibleCats?.some(
-                                                    (cat: any) =>
-                                                      cat === subs.categoryName
-                                                  ) && 'incompatible'
-                                                }`}
-                                                key={index}
-                                                onClick={() => {
-                                                  onModalSelection(subs)
-                                                }}
-                                              >
-                                                <div className="options-image flex align-v-center justify-center">
-                                                  {!!prod?.images?.edges
-                                                    .length ? (
-                                                    <img
-                                                      className="image"
-                                                      src={loadImage(prod)}
-                                                    />
-                                                  ) : (
-                                                    <EmptyProduct />
-                                                  )}
+                                                  <div className="options-name">
+                                                    <h3>
+                                                      {subs?.categoryName}
+                                                    </h3>
+                                                    <h4 className="mb-0">
+                                                      {prod?.name.length > 35
+                                                        ? `${renderColorName(
+                                                            prod
+                                                          )?.substring(
+                                                            0,
+                                                            35
+                                                          )}...`
+                                                        : renderColorName(prod)}
+                                                    </h4>
+                                                  </div>
                                                 </div>
-
-                                                <div className="options-name">
-                                                  <h3>{subs?.categoryName}</h3>
-                                                  <h4 className="mb-0">
-                                                    {prod?.name.length > 35
-                                                      ? `${renderColorName(
-                                                          prod
-                                                        )?.substring(0, 35)}...`
-                                                      : renderColorName(prod)}
-                                                  </h4>
-                                                </div>
-                                              </div>
-                                            )
-                                          }
-                                        })
-                                      )}
-                                    </>
-                                  )
-                                )}
-                              </div>
-                            </>
-                          ))}
+                                              )
+                                            }
+                                          })
+                                        )}
+                                      </>
+                                    )
+                                  )}
+                                </div>
+                              </>
+                            ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    )}
+                  </div>
 
-                <div className="customizer-total flex justify-space align-self-start align-center">
-                  {getWarranty()}
-                  <div>
-                    <label>Ships by</label>
-                    <span className="customizer-total-price">
-                      {getShippingDate()}
-                    </span>
+                  <div className="customizer-total flex justify-space align-self-start align-center">
+                    {getWarranty()}
+                    <div>
+                      <label>Ships by</label>
+                      <span className="customizer-total-price">
+                        {getShippingDate()}
+                      </span>
+                    </div>
+                    <div>
+                      <label>Total</label>
+                      {/* DemoID to render breadPay placement */}
+                      <span className="customizer-total-price">
+                        {convertCurrency(totalPrice)}
+                      </span>
+                      <div id="bread-checkout-btn" />
+                    </div>
+                    {Object.keys(incompatibleProducts).length ? (
+                      <Button
+                        aria-label="Add to Cart"
+                        type="button"
+                        className="btn add-to-cart incompatibilities-btn"
+                      >
+                        <WrongPassword />
+                        Fix Incompatibilities
+                      </Button>
+                    ) : (
+                      <Button
+                        aria-label="Add to Cart"
+                        type="button"
+                        className="btn add-to-cart"
+                        onClick={addToCart}
+                        loading={loading}
+                        disabled={!variant}
+                      >
+                        Add to Cart
+                      </Button>
+                    )}
                   </div>
-                  <div>
-                    <label>Total</label>
-                    {/* DemoID to render breadPay placement */}
-                    <span className="customizer-total-price">
-                      {convertCurrency(totalPrice)}
-                    </span>
-                    <div id="bread-checkout-btn" />
-                  </div>
-                  {Object.keys(incompatibleProducts).length ? (
-                    <Button
-                      aria-label="Add to Cart"
-                      type="button"
-                      className="btn add-to-cart incompatibilities-btn"
-                    >
-                      <WrongPassword />
-                      Fix Incompatibilities
-                    </Button>
-                  ) : (
-                    <Button
-                      aria-label="Add to Cart"
-                      type="button"
-                      className="btn add-to-cart"
-                      onClick={addToCart}
-                      loading={loading}
-                      disabled={!variant}
-                    >
-                      Add to Cart
-                    </Button>
-                  )}
                 </div>
               </div>
-            </div>
-            <div className="components-tabs">
-              <ul className="list-none">
-                <li>
-                  <a
-                    className={activeTab === 'Aesthetics' ? 'isSelected' : ''}
-                    onClick={() => {
-                      setModal(false)
-                      scrollToElement('Aesthetics')
-                    }}
-                  >
-                    Aesthetics
-                  </a>
-                </li>
-                <li>
-                  <a
-                    id="comp"
-                    className={activeTab === 'Components' ? 'isSelected' : ''}
-                    onClick={() => {
-                      setModal(false)
-                      scrollToElement('Components')
-                    }}
-                  >
-                    Components
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={activeTab === 'Services' ? 'isSelected' : ''}
-                    onClick={() => {
-                      setModal(false)
-                      scrollToElement('Services')
-                    }}
-                  >
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={activeTab === 'Peripherals' ? 'isSelected' : ''}
-                    onClick={() => {
-                      setModal(false)
-                      scrollToElement('Peripherals')
-                    }}
-                  >
-                    Peripherals
-                  </a>
-                </li>
-              </ul>
+              <div className="components-tabs">
+                <ul className="list-none">
+                  <li>
+                    <a
+                      className={activeTab === 'Aesthetics' ? 'isSelected' : ''}
+                      onClick={() => {
+                        setModal(false)
+                        scrollToElement('Aesthetics')
+                      }}
+                    >
+                      Aesthetics
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      id="comp"
+                      className={activeTab === 'Components' ? 'isSelected' : ''}
+                      onClick={() => {
+                        setModal(false)
+                        scrollToElement('Components')
+                      }}
+                    >
+                      Components
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={activeTab === 'Services' ? 'isSelected' : ''}
+                      onClick={() => {
+                        setModal(false)
+                        scrollToElement('Services')
+                      }}
+                    >
+                      Services
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={
+                        activeTab === 'Peripherals' ? 'isSelected' : ''
+                      }
+                      onClick={() => {
+                        setModal(false)
+                        scrollToElement('Peripherals')
+                      }}
+                    >
+                      Peripherals
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="box-form absolute-heading 404-page">
+            <h1 className="account-heading">404</h1>
+            <div className="bg-box">
+              <div className="bg-box-head">
+                <div className="flex dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <form>
+                <div className="box-model">
+                  <p>Seems the page you’re looking for isn’t here.{'(>_<)'}</p>
+                  <div className="mt-auto">
+                    <Link href="/">
+                      <button className="btn">Reboot</button>
+                    </Link>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        )
       ) : (
         <div className="fallback-loader">
           <span className="loader"></span>

@@ -191,86 +191,87 @@ export default function Slug({
       productData.data?.products[0]?.node?.productOptions?.edges
     if (optionsProduct) {
       setTimeout(() => {
-      optionsCategories?.forEach((data: any) => {
-        data?.productCategories?.forEach((category: any) => {
-          if (category?.products?.length) {
-            category.products.forEach((productCat: any) => {
-              optionsProduct?.forEach((ele: any) => {
-                data?.category,
-                  ele?.node?.values?.edges?.forEach((filterProduct: any) => {
-                    if (
-                      productCat.node.entityId === filterProduct.node.productId
-                    ) {
-                      filteredProductData.push({
-                        category: data?.category,
-                        subCategories: [
-                          {
-                            categoryName: category?.name,
-                            products: productCat.node,
-                          },
-                        ],
+        optionsCategories?.forEach((data: any) => {
+          data?.productCategories?.forEach((category: any) => {
+            if (category?.products?.length) {
+              category.products.forEach((productCat: any) => {
+                optionsProduct?.forEach((ele: any) => {
+                  data?.category,
+                    ele?.node?.values?.edges?.forEach((filterProduct: any) => {
+                      if (
+                        productCat.node.entityId ===
+                        filterProduct.node.productId
+                      ) {
+                        filteredProductData.push({
+                          category: data?.category,
+                          subCategories: [
+                            {
+                              categoryName: category?.name,
+                              products: productCat.node,
+                            },
+                          ],
+                        })
+                      }
+                    })
+                })
+              })
+            }
+          })
+        })
+
+        const categoriesDataFiltered = (filteredProductData || []).reduce(
+          (
+            accumulator: { categoryName: any; subCategories: any[] }[],
+            item: { category: any; subCategories: any }
+          ) => {
+            const { category, subCategories } = item
+            const existingCategory = accumulator.find(
+              (existingCategory: { categoryName: any }) =>
+                existingCategory.categoryName === category
+            )
+
+            if (existingCategory) {
+              existingCategory.subCategories?.push(subCategories[0])
+            } else {
+              accumulator.push({
+                categoryName: category,
+                subCategories: [subCategories[0]],
+              })
+            }
+
+            return accumulator
+          },
+          []
+        )
+
+        if (categoriesDataFiltered.length) {
+          const filteredSubCategories: any[] = []
+          const productCats = Object.assign({}, productDetail)
+          categoriesDataFiltered?.forEach((cat: any) => {
+            let sortedSubCats: any[] = []
+            productCats?.productOptions?.edges?.forEach((opts: any) => {
+              opts?.node?.values?.edges?.forEach((prod: any) => {
+                cat?.subCategories?.forEach((subs: any) => {
+                  if (subs?.categoryName === opts?.node?.displayName) {
+                    if (prod?.node?.productId === subs?.products?.entityId) {
+                      sortedSubCats.push({
+                        categoryName: subs?.categoryName,
+                        products: subs?.products,
                       })
                     }
-                  })
-              })
-            })
-          }
-        })
-      })
-
-      const categoriesDataFiltered = (filteredProductData || []).reduce(
-        (
-          accumulator: { categoryName: any; subCategories: any[] }[],
-          item: { category: any; subCategories: any }
-        ) => {
-          const { category, subCategories } = item
-          const existingCategory = accumulator.find(
-            (existingCategory: { categoryName: any }) =>
-              existingCategory.categoryName === category
-          )
-
-          if (existingCategory) {
-            existingCategory.subCategories?.push(subCategories[0])
-          } else {
-            accumulator.push({
-              categoryName: category,
-              subCategories: [subCategories[0]],
-            })
-          }
-
-          return accumulator
-        },
-        []
-      )
-
-      if (categoriesDataFiltered.length) {
-        const filteredSubCategories: any[] = []
-        const productCats = Object.assign({}, productDetail)
-        categoriesDataFiltered?.forEach((cat: any) => {
-          let sortedSubCats: any[] = []
-          productCats?.productOptions?.edges?.forEach((opts: any) => {
-            opts?.node?.values?.edges?.forEach((prod: any) => {
-              cat?.subCategories?.forEach((subs: any) => {
-                if (subs?.categoryName === opts?.node?.displayName) {
-                  if (prod?.node?.productId === subs?.products?.entityId) {
-                    sortedSubCats.push({
-                      categoryName: subs?.categoryName,
-                      products: subs?.products,
-                    })
                   }
-                }
+                })
               })
             })
+            filteredSubCategories.push({
+              categoryName: cat?.categoryName,
+              subCategories: sortedSubCats,
+            })
           })
-          filteredSubCategories.push({
-            categoryName: cat?.categoryName,
-            subCategories: sortedSubCats,
-          })
-        })
-        setProductDetail(productCats)
-        groupProductsByCategory(filteredSubCategories)
-      }
-      // setCategories(manipulateCats)
+          setProductDetail(productCats)
+          groupProductsByCategory(filteredSubCategories)
+        }
+        // setCategories(manipulateCats)
       }, 800)
     }
   }, [productsFetched, productData.data, colorOptions])
@@ -293,7 +294,7 @@ export default function Slug({
       <Header headerData={header?.data} />
       {groupedProducts && (
         <Customizer
-          // productsFetched={optionsCategories?.length}
+          productsFetched={optionsCategories?.length === productsFetched}
           product={productDetail}
           categoriesDataFiltered={groupedProducts}
           checkThemeColor={checkThemeColor}
