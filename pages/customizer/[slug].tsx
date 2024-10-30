@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import { useEffect, useState } from 'react'
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
@@ -14,7 +15,6 @@ import builder from '@builder.io/react'
 import getSiteInfo from '@framework/api/operations/get-site-info'
 import useSearch from '@framework/products/use-search'
 import Header from '@components/BuilderHeader/Header'
-import { useEffect, useState } from 'react'
 
 export async function getStaticProps({
   params,
@@ -31,38 +31,40 @@ export async function getStaticProps({
   })
   const { categories } = await getSiteInfo({ config, preview })
   const header = await builder.get('header').toPromise()
-  let optionsCategories: any[] = []
-  categories?.filter((ele) => {
+  
+  const optionsCategories = categories?.reduce((acc: any, ele) => {
     if (ele.entityId === 70) {
-      optionsCategories.push({
+      return [...acc, {
         category: 'Aesthetics',
         productCategories: ele.children,
-      })
+      }];
     }
     if (ele.entityId === 95) {
-      optionsCategories.push({
+      return [...acc, {
         category: 'Components',
         productCategories: ele.children,
-      })
+      }];
     }
     if (ele.entityId === 112) {
-      optionsCategories.push({
+      return [...acc, {
         category: 'Services',
         productCategories: ele.children,
-      })
+      }];
     }
     if (ele.entityId === 113) {
-      optionsCategories.push({
+      return [...acc, {
         category: 'Peripherals',
         productCategories: ele.children,
-      })
+      }];
     }
-  })
+    return acc;
+  }, []);
 
   if (!product) {
     throw new Error(`Product with slug '${params!.slug}' not found`)
   }
-
+  console.log({pages, product, optionsCategories});
+  
   return {
     props: { pages, product, optionsCategories, header },
     revalidate: 200,
@@ -105,6 +107,7 @@ export default function Slug({
   const { data: colorOptions } = useSearch({
     categoryId: 209,
   })
+  console.log({optionsCategories});
 
   optionsCategories?.forEach((category: any) => {
     const uniqueValueIds = new Set(
@@ -114,6 +117,8 @@ export default function Slug({
     const products = useSearch({
       categoryId: commaSeparatedString,
     })
+    console.log({products});
+    
     if (products?.data?.found) {
       productsFetched++
       category?.productCategories?.forEach((subs: any) => {
@@ -171,6 +176,7 @@ export default function Slug({
     }
     setGroupedProducts(groupedData)
   }
+
   const checkThemeColor = (dark: boolean) => {
     if (dark == true) {
       document.querySelector('#body')?.setAttribute('data-theme', 'light')
@@ -189,6 +195,7 @@ export default function Slug({
     let filteredProductData: any = []
     const optionsProduct =
       productData.data?.products[0]?.node?.productOptions?.edges
+      
     if (optionsProduct) {
       setTimeout(() => {
         optionsCategories?.forEach((data: any) => {
@@ -218,7 +225,7 @@ export default function Slug({
             }
           })
         })
-
+        
         const categoriesDataFiltered = (filteredProductData || []).reduce(
           (
             accumulator: { categoryName: any; subCategories: any[] }[],
@@ -292,6 +299,7 @@ export default function Slug({
   return (
     <div>
       <Header headerData={header?.data} />
+      <p>Hello</p>
       {groupedProducts && (
         <Customizer
           productsFetched={optionsCategories?.length === productsFetched}

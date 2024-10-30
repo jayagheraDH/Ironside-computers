@@ -21,7 +21,7 @@ class MyDocument extends Document {
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
-            fetchpriority="high"
+            fetchPriority="high"
           ></link>
         </Head>
         <body className="loading" id="body">

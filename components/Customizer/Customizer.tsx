@@ -25,6 +25,7 @@ import usePrice from '@commerce/use-price'
 import useCart from '@framework/cart/use-cart'
 import useRemoveItem from '@framework/cart/use-remove-item'
 import Link from 'next/link'
+import { Error404 } from './Error404'
 
 interface Props {
   className?: string
@@ -60,6 +61,7 @@ const Cutomizer: FC<Props> = (props) => {
     warranties,
     shippingDays,
   } = OptionSelectionController({ product, categoriesDataFiltered })
+  
   const [basePrice, setBasePrice] = useState<number>(0)
   const [modalData, setModalData] = useState<any>({})
   const [activeTab, setActiveTab] = useState<string>('Aesthetics')
@@ -440,7 +442,7 @@ const Cutomizer: FC<Props> = (props) => {
       window.BreadPayments.setup({
         integrationKey: 'a7496808-6bf0-4504-9ab9-42821c807572',
       })
-      // console.log('BreadPayments Registered: ', placement)
+      console.log('BreadPayments Registered: ', placement)
       window.BreadPayments.registerPlacements(placement)
       window.BreadPayments.on('INSTALLMENT:APPLICATION_CHECKOUT', () => {})
       window.BreadPayments.on('INSTALLMENT:APPLICATION_DECISIONED', () => {})
@@ -820,30 +822,7 @@ const Cutomizer: FC<Props> = (props) => {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="box-form absolute-heading 404-page">
-            <h1 className="account-heading">404</h1>
-            <div className="bg-box">
-              <div className="bg-box-head">
-                <div className="flex dots">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-              </div>
-              <form>
-                <div className="box-model">
-                  <p>Seems the page you’re looking for isn’t here.{'(>_<)'}</p>
-                  <div className="mt-auto">
-                    <Link href="/">
-                      <button className="btn">Reboot</button>
-                    </Link>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        )
+        ) : (<Error404 />)
       ) : (
         <div className="fallback-loader">
           <span className="loader"></span>
