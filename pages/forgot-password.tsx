@@ -288,7 +288,7 @@ export default function forgotPassword({ header }: any) {
       <Portal>
         <ToastContainer
           transition={Flip}
-          position="bottom-right"
+          position="bottom-center"
           autoClose={5000}
           newestOnTop={false}
           closeOnClick={false}

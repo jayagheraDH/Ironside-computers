@@ -191,7 +191,7 @@ const MerchGearProductCard: FC<Props> = ({
           <Portal>
             <ToastContainer
               transition={Flip}
-              position="bottom-right"
+              position="bottom-center"
               autoClose={5000}
               newestOnTop={false}
               closeOnClick={false}
