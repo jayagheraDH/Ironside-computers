@@ -440,7 +440,6 @@ const Cutomizer: FC<Props> = (props) => {
       window.BreadPayments.setup({
         integrationKey: 'a7496808-6bf0-4504-9ab9-42821c807572',
       })
-      // console.log('BreadPayments Registered: ', placement)
       window.BreadPayments.registerPlacements(placement)
       window.BreadPayments.on('INSTALLMENT:APPLICATION_CHECKOUT', () => {})
       window.BreadPayments.on('INSTALLMENT:APPLICATION_DECISIONED', () => {})
