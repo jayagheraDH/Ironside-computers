@@ -9,6 +9,7 @@ import { Text } from '@components/ui'
 import { Layout } from '@components/common'
 import Header from '@components/BuilderHeader/Header'
 import { MerchGearProductCard } from '@components/product'
+import { trackViewItemList } from '@lib/category-event-script'
 
 export async function getStaticProps({
   preview,
@@ -27,7 +28,7 @@ export default function MerchGears({
   header,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [currency, setCurrency] = useState<any>({})
-  let transformedData = []
+  let transformedData: any[] = []
   const { data } = useSearch({
     categoryId: 208,
   })
@@ -122,6 +123,11 @@ export default function MerchGears({
       return result
     }, [])
   }
+  useEffect(() => {
+    if (transformedData && transformedData.length > 0) {
+      trackViewItemList(transformedData)
+    }
+  }, [transformedData])
 
   return (
     <div className="account-page remove-sticky-header">

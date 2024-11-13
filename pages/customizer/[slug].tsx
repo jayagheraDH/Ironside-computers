@@ -4,6 +4,7 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from 'next'
+import Head from 'next/head'
 import { Layout } from '@components/common'
 import Customizer from '@components/Customizer'
 import { getConfig } from '@framework/api'
@@ -15,6 +16,7 @@ import getSiteInfo from '@framework/api/operations/get-site-info'
 import useSearch from '@framework/products/use-search'
 import Header from '@components/BuilderHeader/Header'
 import { useEffect, useState } from 'react'
+import { sendViewItemEvent } from '@lib/view-item-script'
 
 export async function getStaticProps({
   params,
@@ -277,6 +279,12 @@ export default function Slug({
   }, [productsFetched, productData.data, colorOptions])
 
   useEffect(() => {
+    if (productData) {
+      sendViewItemEvent(product);
+    }
+  }, [productData]);
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       document.querySelector('#body')?.setAttribute('data-theme', 'dark')
       document.querySelector('html')?.removeAttribute('data-theme')
@@ -290,23 +298,32 @@ export default function Slug({
   }, [])
 
   return (
-    <div>
-      <Header headerData={header?.data} />
-      {groupedProducts && (
-        <Customizer
-          productsFetched={optionsCategories?.length === productsFetched}
-          product={productDetail}
-          categoriesDataFiltered={groupedProducts}
-          checkThemeColor={checkThemeColor}
-          themeColor={themeColor}
-          colorOpts={colorOpts}
-          currency={currency}
-        />
+    <>
+      {product?.entityId && (
+        <Head>
+          <title>{product.name}</title>
+          <meta name="description" content={product.description} />
+        </Head>
       )}
-      {/* <div className="mt50">
+
+      <div>
+        <Header headerData={header?.data} />
+        {groupedProducts && (
+          <Customizer
+            productsFetched={optionsCategories?.length === productsFetched}
+            product={productDetail}
+            categoriesDataFiltered={groupedProducts}
+            checkThemeColor={checkThemeColor}
+            themeColor={themeColor}
+            colorOpts={colorOpts}
+            currency={currency}
+          />
+        )}
+        {/* <div className="mt50">
         <BuilderComponent model="symbol" />
       </div> */}
-    </div>
+      </div>
+    </>
   )
 }
 

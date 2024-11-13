@@ -25,6 +25,7 @@ import usePrice from '@commerce/use-price'
 import useCart from '@framework/cart/use-cart'
 import useRemoveItem from '@framework/cart/use-remove-item'
 import Link from 'next/link'
+import { trackAddToCart } from '@lib/purchase-event-script'
 
 interface Props {
   className?: string
@@ -252,6 +253,13 @@ const Cutomizer: FC<Props> = (props) => {
         variantId,
         optionSelections,
       })
+      trackAddToCart(
+        currency?.currency_code ? currency?.currency_code : 'USD',
+        product?.name,
+        productId,
+        product?.categories?.edges[0]?.node?.name,
+        totalPrice
+      )
       setLoading(false)
       router.push('/cart')
     } catch (errors: any) {
@@ -268,7 +276,7 @@ const Cutomizer: FC<Props> = (props) => {
         return
       }
       const errData = errors?.response?.data
-      if (Object?.keys(errData?.data)?.length) {
+      if (errData && Object?.keys(errData?.data)?.length) {
         const cats = new Set<any>([])
         const ids = new Set<any>([])
         Object?.keys(errData?.data)?.map((ele: any) => {

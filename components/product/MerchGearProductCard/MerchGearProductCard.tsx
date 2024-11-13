@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import useCustomer from '@framework/use-customer'
 import { Button } from '@components/ui'
 import { useRouter } from 'next/router'
+import { trackAddToCart } from '@lib/purchase-event-script'
 
 interface Props {
   className?: string
@@ -40,17 +41,19 @@ const MerchGearProductCard: FC<Props> = ({
   const { displayModal, closeModal, openSidebar } = useUI()
   const { price } = usePrice({
     // @ts-ignore next-line
-    amount: Number(
-      productsData?.price ||
-        productsData?.prices?.price?.value ||
-        productsData?.prices?.salePrice?.value
-    ),
+    amount:
+      Number(
+        productsData?.price ||
+          productsData?.prices?.price?.value ||
+          productsData?.prices?.salePrice?.value
+      ) || 0,
     // @ts-ignore next-line
-    baseAmount: Number(
-      productsData?.price ||
-        productsData?.prices?.retailPrice?.value ||
-        productsData?.prices?.salePrice?.value
-    ),
+    baseAmount:
+      Number(
+        productsData?.price ||
+          productsData?.prices?.retailPrice?.value ||
+          productsData?.prices?.salePrice?.value
+      ) || 0,
     currencyCode: currency?.currency_code ? currency?.currency_code : 'USD',
     currencyExchange: currency?.currency_exchange_rate
       ? parseFloat(currency?.currency_exchange_rate)
@@ -82,6 +85,17 @@ const MerchGearProductCard: FC<Props> = ({
         customerId: customer && customer?.entityId,
       })
         .then(() => {
+          trackAddToCart(
+            currency?.currency_code ? currency?.currency_code : 'USD',
+            productsData.name,
+            size.productId,
+            productsData?.categories?.edges[0]?.node?.name,
+            Number(
+              productsData?.price ||
+                productsData?.prices?.price?.value ||
+                productsData?.prices?.salePrice?.value
+            ) || 0
+          )
           setLoading(false)
           if (window?.innerWidth <= 1023) {
             router.push('/cart')

@@ -13,6 +13,8 @@ import Header from '@components/BuilderHeader/Header'
 import EmptyProduct from '@components/icons/EmptyProduct'
 import { Cross, Check, Moon, Sun } from '@components/icons'
 import useSearch from '@framework/products/use-search'
+import { trackViewCart } from '@lib/view-cart-event-script'
+import { trackCheckout } from '@lib/checkout-script'
 
 export async function getStaticProps({
   preview,
@@ -100,6 +102,12 @@ export default function Cart({ header }: any) {
   }, [product])
 
   useEffect(() => {
+    if (items?.length) {
+      trackViewCart(items)
+    }
+  }, [items])
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       document.querySelector('#body')?.setAttribute('data-theme', 'dark')
       document.querySelector('html')?.removeAttribute('data-theme')
@@ -115,7 +123,6 @@ export default function Cart({ header }: any) {
   if (typeof window !== 'undefined') {
     document.querySelector('html')?.removeAttribute('data-theme')
   }
-
   return (
     <div className="account-page">
       <Header headerData={header?.data} />
@@ -230,6 +237,9 @@ export default function Cart({ header }: any) {
                     className={`block btn w-100 ${
                       isStockOut?.length ? 'disabled' : ''
                     }`}
+                    onClick={() => {
+                      trackCheckout(currency, data.cart_amount, items)
+                    }}
                     href="/checkout"
                   >
                     Checkout
