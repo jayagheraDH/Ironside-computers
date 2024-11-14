@@ -10,6 +10,7 @@ import { Layout } from '@components/common'
 import Header from '@components/BuilderHeader/Header'
 import { MerchGearProductCard } from '@components/product'
 import { trackViewItemList } from '@lib/category-event-script'
+import { Head } from '@components/common'
 
 export async function getStaticProps({
   preview,
@@ -32,6 +33,12 @@ export default function GamingGears({
   const { data } = useSearch({
     categoryId: 207,
   })
+
+  const pageMeta = {
+    title: 'Gaming Gear | Gaming Mouse, Keyboards & More | Ironside Computers',
+    description:
+      'Shop our selection of gaming gear for sale online, including gaming mouses, keyboards, mouse pads & more. Find the PC gaming accessories you need at Ironside.',
+  }
 
   if (typeof window !== 'undefined') {
     document.querySelector('#body')?.setAttribute('data-theme', 'dark')
@@ -128,39 +135,42 @@ export default function GamingGears({
   }, [transformedData])
 
   return (
-    <div className="account-page remove-sticky-header">
-      <Header headerData={header?.data} />
-      <div className="account-pages maxw-260">
-        <div className="account-pages-heading gm-heading d-flex align-v-center justify-space">
-          <Text variant="pageHeading">Gaming Gears</Text>
-        </div>
-        <div className="mt50">
-          {data ? (
-            <div className="card-grid flex flex-wrap">
-              {transformedData?.map((node: any, index: number) => (
-                <div key={index} className="card">
-                  <MerchGearProductCard
-                    productsData={node}
-                    key={node?.path}
-                    className="animated fadeIn"
-                    imgWidth={318}
-                    imgHeight={367}
-                    currency={currency}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="content-flex w-100">
-              <span className="loader"></span>
-            </div>
-          )}
-        </div>
-        <div className="mt50">
-          <BuilderComponent model="symbol" />
+    <>
+      <Head pageMeta={pageMeta} />
+      <div className="account-page remove-sticky-header">
+        <Header headerData={header?.data} />
+        <div className="account-pages maxw-260">
+          <div className="account-pages-heading gm-heading d-flex align-v-center justify-space">
+            <Text variant="pageHeading">Gaming Gears</Text>
+          </div>
+          <div className="mt50">
+            {data ? (
+              <div className="card-grid flex flex-wrap">
+                {transformedData?.map((node: any, index: number) => (
+                  <div key={index} className="card">
+                    <MerchGearProductCard
+                      productsData={node}
+                      key={node?.path}
+                      className="animated fadeIn"
+                      imgWidth={318}
+                      imgHeight={367}
+                      currency={currency}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="content-flex w-100">
+                <span className="loader"></span>
+              </div>
+            )}
+          </div>
+          <div className="mt50">
+            <BuilderComponent model="symbol" />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

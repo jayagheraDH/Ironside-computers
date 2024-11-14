@@ -459,12 +459,12 @@ const Cutomizer: FC<Props> = (props) => {
   return (
     <>
       <NextSeo
-        title={productDescription[0]?.replace(' ', '')}
-        description={product.description}
+        title={product?.name}
+        description={product?.description?.replace(/<[^>]*>/g, '')}
         openGraph={{
           type: 'website',
-          title: productDescription[0]?.trim(),
-          description: product.description,
+          title: product?.name,
+          description: product.description?.replace(/<[^>]*>/g, ''),
           images: [
             {
               url: product?.images?.edges?.[0]?.node.urlOriginal!,

@@ -26,7 +26,7 @@ const Noop: FC = ({ children }) => <>{children}</>
 
 builder.init('f6d91abf288f4e5fb3b6f1e8b846274b')
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: any) {
   const Layout = (Component as any).Layout || Noop
   const [windowWidth, setWindowWidth] = useState<number>(1920)
 
@@ -34,10 +34,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     document.body.classList?.remove('loading')
     setWindowWidth(window.outerWidth)
   }, [])
+  const pageMeta = {
+    title: pageProps?.product?.name || pageProps?.page?.data?.title,
+    description:
+      pageProps?.product?.description?.replace(/<[^>]*>/g, '') ||
+      pageProps?.page?.data?.description,
+  }
 
   return (
     <>
-      <Head />
+      <Head pageMeta={pageMeta} />
       <ManagedUIContext>
         {windowWidth >= 1023 ? (
           <Layout pageProps={pageProps}>
