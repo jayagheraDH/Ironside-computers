@@ -144,7 +144,8 @@ const Cutomizer: FC<Props> = (props) => {
               if (
                 // default product selection
                 productsCategories.node.isDefault &&
-                productsCategories.node.productId === ele.entityId
+                node?.node?.displayName===subs?.categoryName&&
+                productsCategories.node.productId === ele.entityId 
               ) {
                 products?.push({
                   entityId: ele.entityId,
