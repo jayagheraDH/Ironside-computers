@@ -28,12 +28,6 @@ const OptionSelectionController = ({ product, categoriesDataFiltered }: any) => 
                         if (category.toLocaleLowerCase() == 'case') {
                             caseImageChange(productData?.product_id, colorOpts)
                         }
-                        // const colorArr = [...selectedColor]
-                        // colorArr?.forEach((ele: any) => {
-                        //     if (category === ele?.category_name && !colorOpts) {
-                        //         setSelectedColor([])
-                        //     }
-                        // })
                         setSelectedIds((prev: any) => {
                             const catExist = prev?.findIndex(
                                 (obj: any) => obj?.cat === productData?.category_name
@@ -103,13 +97,15 @@ const OptionSelectionController = ({ product, categoriesDataFiltered }: any) => 
                                         product_image: colorOpts?.images?.edges[0]?.node?.urlOriginal
                                     }
                                 }
+                                const temp = []
                                 if (catExist < 0) {
-                                    return [
+                                    temp.push(
                                         ...prev,
                                         colorOptionData[0],
-                                    ]
+                                    )
                                 }
-                                return prev
+                                // console.log("After < 0 function !!!!!!!!!!!!!", temp?.length ? temp : prev)
+                                return temp?.length ? temp : prev
                             })
 
                             setSelectedIds((prev: any) => {
@@ -203,7 +199,7 @@ const OptionSelectionController = ({ product, categoriesDataFiltered }: any) => 
         })
         return shipsBy
     }
-
+    // console.log("selectedColor:: ", selectedColor)
     return {
         selectedIds,
         selectedColor,

@@ -144,6 +144,7 @@ const Cutomizer: FC<Props> = (props) => {
               if (
                 // default product selection
                 productsCategories.node.isDefault &&
+                node?.node?.displayName === subs?.categoryName &&
                 productsCategories.node.productId === ele.entityId
               ) {
                 products?.push({
@@ -160,7 +161,8 @@ const Cutomizer: FC<Props> = (props) => {
                 ele?.customFields.edges.forEach((field: any) => {
                   if (
                     field?.node.value.split(',')[2] ==
-                    productsCategories.node.productId
+                      productsCategories.node.productId &&
+                    node?.node?.displayName === subs?.categoryName
                   ) {
                     colorOpts?.forEach((color: any) => {
                       if (
@@ -338,10 +340,14 @@ const Cutomizer: FC<Props> = (props) => {
       )
   }
 
-  const renderColorName = (prod: any) => {
+  const renderColorName = (prod: any, subs: any) => {
     let name = prod?.name
+    // console.log(selectedColor)
     selectedColor.forEach((color: any) => {
-      if (color?.parent_id === prod?.entityId) {
+      if (
+        color?.parent_id === prod?.entityId &&
+        color?.category_name === subs?.categoryName
+      ) {
         name = color?.product_name
       }
     })
@@ -620,6 +626,7 @@ const Cutomizer: FC<Props> = (props) => {
                     </div>
                     {modal ? (
                       <ProductSelectionModal
+                        productOptions={product?.productOptions?.edges}
                         optionSelections={optionSelections}
                         setIncompatibleProducts={setIncompatibleProducts}
                         incompatibleProdIds={incompatibleProdIds}
@@ -710,12 +717,16 @@ const Cutomizer: FC<Props> = (props) => {
                                                     <h4 className="mb-0">
                                                       {prod?.name.length > 35
                                                         ? `${renderColorName(
-                                                            prod
+                                                            prod,
+                                                            subs
                                                           )?.substring(
                                                             0,
                                                             35
                                                           )}...`
-                                                        : renderColorName(prod)}
+                                                        : renderColorName(
+                                                            prod,
+                                                            subs
+                                                          )}
                                                     </h4>
                                                   </div>
                                                 </div>

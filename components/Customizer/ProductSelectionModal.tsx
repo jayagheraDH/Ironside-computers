@@ -24,6 +24,7 @@ const ProductSelectionModal = ({
   activeTab,
   defaultColors,
   setDefaultColors,
+  productOptions,
 }: any) => {
   const { displayModal, closeModal } = useUI()
   const [toggle, setToggle] = useState(false)
@@ -187,12 +188,15 @@ const ProductSelectionModal = ({
     return image
   }
 
-  const renderColorName = (data: any) => {
+  const renderColorName = (data: any, categoryName: string) => {
     let color: any = {}
     let colorName = data.customFields.edges[0].node.value
     selectedColor?.forEach((ele: any) => {
       data?.customFields?.edges.map((field: any) => {
-        if (field?.node?.value.split(',')[2] == ele?.product_id) {
+        if (
+          field?.node?.value.split(',')[2] == ele?.product_id &&
+          ele?.category_name === categoryName
+        ) {
           color = field?.node
         }
       })
@@ -371,42 +375,6 @@ const ProductSelectionModal = ({
                   <>
                     {data?.customFields?.edges.length < 2 && !isMerch ? (
                       <div className="color-pattel flex w-100">
-                        {/* {data?.customFields?.edges?.map(
-                          (color: any, index: number) => (
-                            <div key={index}>
-                              <button
-                                className={
-                                  selectedColor.some(
-                                    (product: any) =>
-                                      product.product_id ===
-                                      parseInt(
-                                        color?.node?.value?.split(',')[2]
-                                      )
-                                  )
-                                    ? 'selectedColorOption'
-                                    : ''
-                                }
-                                style={{
-                                  cursor: 'pointer',
-                                  backgroundColor: `${
-                                    color?.node?.value?.split(',')[1]
-                                  }`,
-                                }}
-                                onClick={() => {
-                                  handleColorSelection(data, color)
-                                }}
-                              ></button>
-                              {colorOpts?.map((options: any) => {
-                                if (
-                                  color?.node?.value?.split(',')[2] ==
-                                  options?.entityId
-                                ) {
-                                  return renderColorPrice(options, data)
-                                }
-                              })}
-                            </div>
-                          )
-                        )} */}
                         {!selectedIds?.some(
                           (product: any) =>
                             product?.product === data?.entityId &&
@@ -428,31 +396,66 @@ const ProductSelectionModal = ({
                             <ul className="list-none">
                               {data?.customFields?.edges?.map(
                                 (color: any, index: number) => (
-                                  <li key={index}>
-                                    <p
-                                      className="mb-0"
-                                      onClick={() => {
-                                        handleColorSelection(data, color)
-                                      }}
-                                    >
-                                      <span
-                                        className="colorPattelListBg"
-                                        style={{
-                                          backgroundColor:
-                                            color?.node?.value?.split(',')[1],
-                                        }}
-                                      ></span>
-                                      {color?.node?.value?.split(',')[0]}
-                                      {colorOpts?.map((options: any) => {
-                                        if (
-                                          color?.node?.value?.split(',')[2] ==
-                                          options?.entityId
-                                        ) {
-                                          return renderColorPrice(options, data)
-                                        }
-                                      })}
-                                    </p>
-                                  </li>
+                                  <>
+                                    {productOptions?.map((opt: any) => {
+                                      if (
+                                        opt?.node?.displayName ===
+                                        modalData?.categoryName
+                                      ) {
+                                        return opt?.node?.values?.edges?.map(
+                                          (colorData: any) => {
+                                            if (
+                                              colorData?.node?.productId ==
+                                              color?.node?.value.split(',')[2]
+                                            )
+                                              return (
+                                                <li key={index}>
+                                                  <p
+                                                    className="mb-0"
+                                                    onClick={() => {
+                                                      handleColorSelection(
+                                                        data,
+                                                        color
+                                                      )
+                                                    }}
+                                                  >
+                                                    <span
+                                                      className="colorPattelListBg"
+                                                      style={{
+                                                        backgroundColor:
+                                                          color?.node?.value?.split(
+                                                            ','
+                                                          )[1],
+                                                      }}
+                                                    ></span>
+                                                    {
+                                                      color?.node?.value?.split(
+                                                        ','
+                                                      )[0]
+                                                    }
+                                                    {colorOpts?.map(
+                                                      (options: any) => {
+                                                        if (
+                                                          color?.node?.value?.split(
+                                                            ','
+                                                          )[2] ==
+                                                          options?.entityId
+                                                        ) {
+                                                          return renderColorPrice(
+                                                            options,
+                                                            data
+                                                          )
+                                                        }
+                                                      }
+                                                    )}
+                                                  </p>
+                                                </li>
+                                              )
+                                          }
+                                        )
+                                      }
+                                    })}
+                                  </>
                                 )
                               )}
                             </ul>
@@ -479,11 +482,18 @@ const ProductSelectionModal = ({
                           <span
                             className="colorPattelListBg"
                             style={{
-                              backgroundColor:
-                                renderColorName(data).split(',')[1],
+                              backgroundColor: renderColorName(
+                                data,
+                                modalData?.categoryName
+                              ).split(',')[1],
                             }}
                           ></span>
-                          {renderColorName(data).split(',')[0]}
+                          {
+                            renderColorName(
+                              data,
+                              modalData?.categoryName
+                            ).split(',')[0]
+                          }
                         </>
                         <span className="arrow">
                           <DropdownArrow />
